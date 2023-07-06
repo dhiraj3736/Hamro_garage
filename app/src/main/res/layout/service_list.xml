@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/listactivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:cardCornerRadius="25dp"
+        android:layout_marginVertical="225dp"
+        android:layout_marginHorizontal="20dp"
+        app:strokeWidth="1dp"
+
+
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="1"
+            android:padding="50px"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/purple_700"
+            android:id="@+id/txt_id"/>
+     <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Hello this is todo app"
+            android:padding="50px"
+         android:layout_marginLeft="20dp"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/purple_700"
+            android:id="@+id/txt_name"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_delete_24"
+            android:layout_gravity="right"
+            android:id="@+id/deleteBtn"
+
+            />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
