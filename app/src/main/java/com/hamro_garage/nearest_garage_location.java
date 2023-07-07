@@ -1,8 +1,9 @@
-//Banako fragment class
 package com.hamro_garage;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -16,13 +17,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -33,6 +33,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,8 +52,8 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
 
-            if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(requireActivity(),
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -67,27 +71,12 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
                                 mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
                                 mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
-
-                                mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                                    @Override
-                                    public void onMapClick(LatLng latLng) {
-                                        mMap.clear(); // Clear any existing markers on the map
-
-                                        mMap.addMarker(new MarkerOptions().position(latLng).title("Garage Location"));
-                                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
-                                        saveGarageLocation(latLng.latitude, latLng.longitude);
-                                    }
-                                });
                             }
                         }
                     });
 
-            // Add the following code here
-            if (garageLocation != null) {
-                mMap.addMarker(new MarkerOptions().position(garageLocation).title("Garage Location"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(garageLocation));
-            }
+            // Fetch and display garage locations
+            fetchGarageLocations();
         }
     };
 
@@ -127,49 +116,24 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
 
     }
 
-    private void saveGarageLocation(double latitude, double longitude) {
-        // Check if the garage location is already set
-        if (garageLocation != null) {
-            // Show a dialog to confirm location change
-            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-            builder.setTitle("Location Change");
-            builder.setMessage("Are you sure you want to change your garage location?");
-            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    // Proceed with saving the new location
-                    performSaveGarageLocation(latitude, longitude);
-                }
-            });
-            builder.setNegativeButton("No", null);
-            builder.show();
-        } else {
-            // Save the location directly
-            performSaveGarageLocation(latitude, longitude);
-        }
-    }
-
-    private void performSaveGarageLocation(double latitude, double longitude) {
-        String URL = Endpoints.SAVE_LOCATION;
+    private void fetchGarageLocations() {
+        // Make a request to fetch the garage locations from the server
+        String URL = Endpoints.FETCH_LOCATIONS;
         RequestQueue queue = Volley.newRequestQueue(requireContext());
 
-        Map<String, String> params = new HashMap<>();
-        params.put("latitude", String.valueOf(latitude));
-        params.put("longitude", String.valueOf(longitude));
+        JSONObject requestObject = new JSONObject();
+        try {
+            requestObject.put("u_id", getUserId()); // Replace with your user ID retrieval logic
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        StringRequest request = new StringRequest(Request.Method.POST, URL,
-                new Response.Listener<String>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, requestObject,
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
-                        if (response.equals("success")) {
-                            // Handle success response
-                            Toast.makeText(requireContext(), "Location saved successfully", Toast.LENGTH_SHORT).show();
-                            // Update the garage location variable
-                            garageLocation = new LatLng(latitude, longitude);
-                        } else {
-                            // Handle error response
-                            Toast.makeText(requireContext(), "Failed to save location", Toast.LENGTH_SHORT).show();
-                        }
+                    public void onResponse(JSONObject response) {
+                        // Process the response and add markers for each garage location
+                        processGarageLocations(response);
                     }
                 },
                 new Response.ErrorListener() {
@@ -177,13 +141,32 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                     public void onErrorResponse(VolleyError error) {
                         // Handle the error response if needed
                     }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                return params;
-            }
-        };
+                });
 
         queue.add(request);
+    }
+
+    private void processGarageLocations(JSONObject response) {
+        try {
+            JSONArray locationsArray = response.getJSONArray("locations");
+            Toast.makeText(requireContext(), response.toString(), Toast.LENGTH_SHORT).show();
+            for (int i = 0; i < locationsArray.length(); i++) {
+                JSONObject locationObject = locationsArray.getJSONObject(i);
+                double latitude = locationObject.getDouble("latitude");
+                double longitude = locationObject.getDouble("longitude");
+                LatLng garageLatLng = new LatLng(latitude, longitude);
+
+                // Add marker for each garage location
+                mMap.addMarker(new MarkerOptions().position(garageLatLng).title("Garage Location"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getUserId() {
+        // Replace this with your user ID retrieval logic
+        SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("user_id", ""); // Provide a default value if user ID is not found
     }
 }
