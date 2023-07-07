@@ -2,6 +2,7 @@ package com.hamro_garage;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -170,6 +171,48 @@ public class OwnerMapFragment extends Fragment implements OnMapReadyCallback {
                         } else {
                             // Handle error response
                             Toast.makeText(requireContext(), "Failed to save location", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle the error response if needed
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                return params;
+            }
+        };
+
+        queue.add(request);
+    }
+
+    // Add this new method
+    private void retrieveGarageLocation() {
+        String URL = Endpoints.SAVE_LOCATION;
+        RequestQueue queue = Volley.newRequestQueue(requireContext());
+
+        Map<String, String> params = new HashMap<>();
+        params.put("u_id", StaticValues.garageid);
+
+        StringRequest request = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (!response.equals("error")) {
+                            // Parse the latitude and longitude from the response
+                            String[] location = response.split(",");
+                            double latitude = Double.parseDouble(location[0]);
+                            double longitude = Double.parseDouble(location[1]);
+
+                            // Update the garage location variable
+                            garageLocation = new LatLng(latitude, longitude);
+
+                            // Add the garage marker on the map
+                            mMap.addMarker(new MarkerOptions().position(garageLocation).title("Garage Location"));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(garageLocation));
                         }
                     }
                 },
