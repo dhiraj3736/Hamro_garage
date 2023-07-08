@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -69,7 +70,10 @@ public class activity_login extends AppCompatActivity {
         email=lemail.getText().toString().trim();
         password=lpassword.getText().toString().trim();
         if(email.isEmpty()){
-            Toast.makeText(this, "please enter email", Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT);
+            TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+            toastMessage.setTextColor(Color.RED);
+            toast.show();
         }
         if(password.isEmpty()){
             Toast.makeText(this, "please enter password", Toast.LENGTH_SHORT).show();
