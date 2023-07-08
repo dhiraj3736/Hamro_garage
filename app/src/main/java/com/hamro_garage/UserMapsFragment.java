@@ -52,7 +52,8 @@ public class UserMapsFragment extends Fragment implements OnMapReadyCallback {
                             if (location != null) {
                                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
                                 mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
-                                mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+                                float zoomLevel = 14.0f;
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,zoomLevel));
                             }
                         }
                     });
