@@ -101,5 +101,15 @@
         android:textColor="@color/white"
         android:textSize="36sp"
         android:textStyle="bold" />
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/baseline_person_24"
+        android:layout_marginTop="140dp"
+        android:layout_marginStart="180dp"
+        android:onClick="view"
+        android:id="@+id/profilebtn"
+        />
+
 
 </RelativeLayout>

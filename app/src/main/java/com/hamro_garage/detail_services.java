@@ -52,9 +52,9 @@ public class detail_services extends AppCompatActivity {
         listView.setAdapter(adaptor);
         retrieveData();
 
-        Intent intent=getIntent();
-        sessionid=intent.getStringExtra("session_id");
-        Log.d("session_id",""+sessionid);
+//        Intent intent=getIntent();
+//        sessionid=intent.getStringExtra("session_id");
+//        Log.d("session_id",""+sessionid);
 
     }
     public void save(View view){
@@ -70,7 +70,7 @@ public class detail_services extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         if (response.equals("success")){
-                            Toast.makeText(detail_services.this, "Added", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(detail_services.this, "Add successfully", Toast.LENGTH_SHORT).show();
                             retrieveData();
                             editText.setText("");
 
