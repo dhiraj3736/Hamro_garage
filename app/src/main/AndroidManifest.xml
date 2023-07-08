@@ -19,9 +19,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".editprofile"
-            android:exported="false" />
-        <activity
             android:name=".nearest_garage"
             android:exported="false" />
         <activity

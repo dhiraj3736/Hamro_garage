@@ -104,7 +104,7 @@ profile pro1;
 
     }
     public void edit(){
-        Intent intent=new Intent(user_profile.this,editprofile.class);
+        Intent intent=new Intent(user_profile.this,user_profile.class);
         startActivity(intent);
     }
 }
