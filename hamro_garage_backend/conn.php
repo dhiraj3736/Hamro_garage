@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $database="hamro_garage";
 $username="root";
 $password="";
@@ -10,3 +11,4 @@ if($conn->connect_error){
 	die("connection failed".$conn->connect_error);
 }
 
+?>
