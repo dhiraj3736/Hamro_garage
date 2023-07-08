@@ -28,25 +28,24 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class user_profile extends AppCompatActivity {
+public class garage_owner_profile extends AppCompatActivity {
     TextView fullname,address,mobile,email;
-   Button button;
+    Button button;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.activity_garage_owner_profile);
         retrieveData();
         button=findViewById(R.id.edit);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent intent=new Intent(user_profile.this,edit_user_profile.class);
+                Intent intent=new Intent(garage_owner_profile.this,edit_user_profile.class);
 
                 startActivity(intent);
             }
         });
-
     }
 
     public void retrieveData(){
@@ -95,7 +94,7 @@ public class user_profile extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(user_profile.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(garage_owner_profile.this,error.getMessage(),Toast.LENGTH_SHORT).show();
             }
         }) {
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -105,7 +104,7 @@ public class user_profile extends AppCompatActivity {
                 return data;
             }
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(user_profile.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(garage_owner_profile.this);
         requestQueue.add(stringRequest);
 
 

@@ -17,7 +17,7 @@ public class user_dashboard extends AppCompatActivity {
 
 LinearLayout ubike;
 LinearLayout user_profile;
-String sessionid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,16 +32,16 @@ String sessionid;
 
 
 
-        Intent intent=getIntent();
-        sessionid=intent.getStringExtra("session_id");
-        Log.d("session_id",""+sessionid);
+//        Intent intent=getIntent();
+//        sessionid=intent.getStringExtra("session_id");
+//        Log.d("session_id",""+sessionid);
 
         ubike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                startActivity(new Intent(user_dashboard.this,activity_login.class));
                 Intent intent1 = new Intent(user_dashboard.this, nearest_garage.class);
-                intent1.putExtra("sessionID",sessionid);
+//                intent1.putExtra("sessionID",sessionid);
                 startActivity(intent1);
                 finish();
 
@@ -52,7 +52,7 @@ String sessionid;
             public void onClick(View view) {
 //                startActivity(new Intent(user_dashboard.this,user_profile.class));
                 Intent intent2 = new Intent(user_dashboard.this, user_profile.class);
-                intent2.putExtra("sessionID",sessionid);
+//                intent2.putExtra("sessionID",sessionid);
                 startActivity(intent2);
                 finish();
             }

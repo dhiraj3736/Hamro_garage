@@ -19,6 +19,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".edit_garage_owner_profile"
+            android:exported="false" />
+        <activity
+            android:name=".edit_user_profile"
+            android:exported="false" />
+        <activity
+            android:name=".garage_owner_profile"
+            android:exported="false" />
+        <activity
             android:name=".nearest_garage"
             android:exported="false" />
         <activity
@@ -65,9 +74,6 @@
         </activity>
         <activity
             android:name=".Main_dashboard"
-            android:exported="true" />
-        <activity
-            android:name=".dashboard"
             android:exported="true" />
         <activity
             android:name=".activity_login"

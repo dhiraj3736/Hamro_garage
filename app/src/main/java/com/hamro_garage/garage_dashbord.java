@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 public class garage_dashbord extends AppCompatActivity {
     LinearLayout addbusiness,addlocation;
 String sessionid;
+ImageButton profilebtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,17 +20,18 @@ String sessionid;
 
         addbusiness=findViewById(R.id.addbtn);
         addlocation=findViewById(R.id.addlocationbtn);
+        profilebtn=findViewById(R.id.profilebtn);
 
-
-        Intent intent=getIntent();
-        sessionid=intent.getStringExtra("session_id");
-        Log.d("session_id",""+sessionid);
+//
+//        Intent intent=getIntent();
+//        sessionid=intent.getStringExtra("session_id");
+//        Log.d("session_id",""+sessionid);
 
         addbusiness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent1=new Intent(garage_dashbord.this,detail_services.class);
-                intent1.putExtra("session_id",sessionid);
+//                intent1.putExtra("session_id",sessionid);
                 startActivity(intent1);
 
             }
@@ -38,6 +41,13 @@ String sessionid;
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(garage_dashbord.this,detail_location.class);
+                startActivity(intent);
+            }
+        });
+        profilebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(garage_dashbord.this,garage_owner_profile.class);
                 startActivity(intent);
             }
         });

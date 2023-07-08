@@ -89,15 +89,15 @@ public class activity_login extends AppCompatActivity {
                         Log.d("Session ID",""+sessionID);
                         if(jsonObject.getString("result").equals("sucess")){
                             if(user.equals("customer")) {
-                                Intent intent = new Intent(activity_login.this, user_dashboard.class);
-                                intent.putExtra("session_id",sessionID);
-                                startActivity(intent);
+                                Intent intent2 = new Intent(activity_login.this, user_dashboard.class);
+//                                intent.putExtra("session_id",sessionID);
+                                startActivity(intent2);
 
                                 finish();
                             }
                             else if (user.equals("mechanic")){
                                 Intent intent = new Intent(activity_login.this, garage_dashbord.class);
-                                intent.putExtra("session_id",sessionID);
+//                                intent.putExtra("session_id",sessionID);
                                 startActivity(intent);
                                 finish();
 
