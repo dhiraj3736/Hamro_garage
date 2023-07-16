@@ -19,6 +19,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".create_garage"
+            android:exported="false" />
+        <activity
             android:name=".edit_garage_owner_profile"
             android:exported="false" />
         <activity

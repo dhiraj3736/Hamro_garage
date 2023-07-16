@@ -8,11 +8,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class garage_dashbord extends AppCompatActivity {
-    LinearLayout addbusiness,addlocation;
+    LinearLayout addbusiness,addlocation,creategarage;
 String sessionid;
-ImageButton profilebtn;
+TextView profilebtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,7 @@ ImageButton profilebtn;
         addbusiness=findViewById(R.id.addbtn);
         addlocation=findViewById(R.id.addlocationbtn);
         profilebtn=findViewById(R.id.profilebtn);
+        creategarage=findViewById(R.id.creategarage);
 
 //
 //        Intent intent=getIntent();
@@ -48,6 +50,13 @@ ImageButton profilebtn;
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(garage_dashbord.this,garage_owner_profile.class);
+                startActivity(intent);
+            }
+        });
+        creategarage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(garage_dashbord.this,create_garage.class);
                 startActivity(intent);
             }
         });
