@@ -14,4 +14,6 @@ public class Endpoints {
     public static final String GET_GARAGE_WONER_PROFILE = BASE_URL + "garage_owner_profile.php";
     public static final String FETCH_LOCATIONS= BASE_URL + "fetch_locations.php";
     public static final String CREATEGARAGE= BASE_URL + "creategarage.php";
+    public static final String get_garage_detail= BASE_URL + "get_garage_detail.php";
+    public static final String get_edit_garage_detail= BASE_URL + "edit_garage_detail.php";
 }
