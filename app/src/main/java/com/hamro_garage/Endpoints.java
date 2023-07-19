@@ -6,6 +6,7 @@ public class Endpoints {
 
     public static final String SIGNUP_URL = BASE_URL + "user_signup.php";
     public static final String LOGIN_URL = BASE_URL + "user_login.php";
+    public static final String ADMIN_LOGIN_URL = BASE_URL + "admin_login.php";
     public static final String USER_PROFILE = BASE_URL + "getprofile.php";
     public static final String SERVICES_REQUESTS = BASE_URL + "services.php";
     public static final String SAVE_LOCATION = BASE_URL + "save_location.php";
@@ -16,4 +17,6 @@ public class Endpoints {
     public static final String CREATEGARAGE= BASE_URL + "creategarage.php";
     public static final String get_garage_detail= BASE_URL + "get_garage_detail.php";
     public static final String get_edit_garage_detail= BASE_URL + "edit_garage_detail.php";
+    public static final String get_business= BASE_URL + "getbusiness.php";
+    public static final String approve= BASE_URL + "approve.php";
 }

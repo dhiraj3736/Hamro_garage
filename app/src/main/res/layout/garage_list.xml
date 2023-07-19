@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="160dp"
+        android:text="1"
+        android:gravity="center_vertical|center"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:background="@drawable/circle"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/garagename"
+        android:text="garagename"
+        android:textSize="20sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/time"
+        android:text="available time"
+        android:textSize="20sp"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/mobile"
+        android:text="mobile"
+        android:textSize="20sp"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/service"
+        android:text="service"
+        android:textSize="20sp"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/location"
+        android:text="location"
+        android:textSize="20sp"
+        android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="approve"
+
+        android:layout_marginStart="70dp"/>
+
+    <Button
+        android:id="@+id/notapprove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not approve"
+        android:layout_marginStart="10dp"/>
+</LinearLayout>
+
+
+</LinearLayout>

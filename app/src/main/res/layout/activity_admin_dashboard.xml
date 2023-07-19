@@ -4,98 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
-    tools:context=".chooseuser">
+    tools:context=".garage_dashbord">
 
     <View
         android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@drawable/bg_view"/>
-
+        android:background="@drawable/bg_view" />
 
     <GridLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="3"
-
-        android:columnCount="2"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
         android:layout_below="@+id/top_view"
-        android:layout_marginTop="130dp">
-
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginRight="25dp"
+        android:columnCount="3"
+        android:rowCount="3">
         <androidx.cardview.widget.CardView
-
-            app:cardCornerRadius="15dp"
-            app:cardElevation="12dp"
-            android:layout_rowWeight="1"
             android:layout_row="1"
-            android:layout_column="0"
-            android:layout_margin="12dp">
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="0.5"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="15dp"
+
+            app:cardElevation="12dp">
 
             <LinearLayout
+                android:id="@+id/business"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
+
                 <ImageView
-                    android:id="@+id/customerbtn"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@mipmap/ic_customer"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/baseline_add_budiness" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Customer"
                     android:layout_gravity="center_horizontal"
+                    android:text="Business"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
-
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            app:cardCornerRadius="15dp"
-            app:cardElevation="12dp"
-            android:layout_rowWeight="1"
             android:layout_row="1"
-            android:layout_column="1"
-            android:layout_margin="12dp">
+            android:layout_rowWeight="1"
+            android:layout_column="2"
+            android:layout_columnWeight="0.5"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp">
 
             <LinearLayout
+                android:id="@+id/user_detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:gravity="center"
+                android:orientation="vertical">
 
-                android:gravity="center">
                 <ImageView
-                    android:id="@+id/mechanicbtn"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:src="@mipmap/ic_mechanic"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/baseline_add_budiness" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Garage"
                     android:layout_gravity="center_horizontal"
+                    android:text="user Detail"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
             </LinearLayout>
-
 
         </androidx.cardview.widget.CardView>
 
 
     </GridLayout>
-
 
     <TextView
         android:id="@+id/textv"
@@ -103,30 +99,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="HAMRO GARAGE"
+        android:text="Admin"
         android:textColor="@color/white"
         android:textSize="36sp"
         android:textStyle="bold" />
-
-
-    <TextView
-        android:id="@+id/admin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:text="@string/admin"
-
-        android:textColor="@color/white"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-
-
-
-
-
-
 
 
 

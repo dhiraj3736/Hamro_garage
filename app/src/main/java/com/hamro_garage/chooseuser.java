@@ -7,15 +7,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class chooseuser extends AppCompatActivity {
    ImageView customer,mechanic;
+   TextView admin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chooseuser);
         customer=findViewById(R.id.customerbtn);
         mechanic=findViewById(R.id.mechanicbtn);
+        admin=findViewById(R.id.admin);
 
         customer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +38,15 @@ public class chooseuser extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(chooseuser.this,admin_login.class);
+                startActivity(intent);
+            }
+
+        });
+
 
 
     }
