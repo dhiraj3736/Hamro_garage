@@ -14,6 +14,7 @@
         android:layout_height="200dp"
         android:background="@drawable/bg_view"/>
 
+
     <GridLayout
 
         android:layout_width="match_parent"
@@ -82,7 +83,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mechanic"
+                    android:text="Garage"
                     android:layout_gravity="center_horizontal"
                     android:textColor="@color/black"
                     android:textSize="20sp"
@@ -108,7 +109,17 @@
         android:textStyle="bold" />
 
 
+    <TextView
+        android:id="@+id/admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:text="@string/admin"
 
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
 
 

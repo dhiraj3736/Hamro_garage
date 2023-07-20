@@ -139,6 +139,7 @@ public class OwnerMapFragment extends Fragment implements OnMapReadyCallback {
                 public void onClick(DialogInterface dialog, int which) {
                     // Proceed with saving the new location
                     performSaveGarageLocation(latitude, longitude);
+                    requireActivity().onBackPressed();
                 }
             });
             builder.setNegativeButton("No", null);
