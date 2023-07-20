@@ -19,4 +19,5 @@ public class Endpoints {
     public static final String get_edit_garage_detail= BASE_URL + "edit_garage_detail.php";
     public static final String get_business= BASE_URL + "getbusiness.php";
     public static final String approve= BASE_URL + "approve.php";
+    public static final String pending= BASE_URL + "pending.php";
 }
