@@ -50,7 +50,7 @@ public class View_garage_detail extends AppCompatActivity {
     }
 
     public void retrieveData(){
-
+        String status1="approve";
         garagename = findViewById(R.id.garage_name);
        time = findViewById(R.id.time);
         mobile = findViewById(R.id.mobile);
@@ -105,6 +105,7 @@ public class View_garage_detail extends AppCompatActivity {
                 Map<String, String> data = new HashMap<>();
 
                 data.put("u_id", StaticValues.garageid);
+                data.put("status", status1);
                 return data;
             }
         };

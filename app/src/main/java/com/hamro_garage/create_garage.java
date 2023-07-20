@@ -26,7 +26,7 @@ import java.util.Map;
 public class create_garage extends AppCompatActivity {
     Button createbtn;
 
-   EditText garagename,time,mobile,service,location;
+    EditText garagename,time,mobile,service,location;
 
 
     String sessionid;
@@ -42,10 +42,10 @@ public class create_garage extends AppCompatActivity {
         createbtn = findViewById(R.id.createbtn);
         garagename = findViewById(R.id.garagename);
         time=findViewById(R.id.time);
-      mobile=findViewById(R.id.mobileno);
-      service=findViewById(R.id.service);
-      location=findViewById(R.id.location);
-      addlocation=findViewById(R.id.addlocation);
+        mobile=findViewById(R.id.mobileno);
+        service=findViewById(R.id.service);
+        location=findViewById(R.id.location);
+        addlocation=findViewById(R.id.addlocation);
 
 
         addlocation.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +68,7 @@ public class create_garage extends AppCompatActivity {
         String mobile1 = mobile.getText().toString().trim();
         String service1 = service.getText().toString().trim();
         String location1 = location.getText().toString().trim();
+        String status1="pending";
 
         if (service1.isEmpty()) {
             Toast.makeText(this, "Please enter services", Toast.LENGTH_SHORT).show();
@@ -87,6 +88,9 @@ public class create_garage extends AppCompatActivity {
                         else if (response.equals("failure")) {
                             Toast.makeText(create_garage.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
+                        else if (response.equals("Already registered")) {
+                            Toast.makeText(create_garage.this, "Garage already registered", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -104,6 +108,7 @@ public class create_garage extends AppCompatActivity {
                 data.put("mobile",mobile1);
                 data.put("service",service1);
                 data.put("location",location1);
+                data.put("status", status1);
                 data.put("u_id", StaticValues.garageid);
                 return data;
             }

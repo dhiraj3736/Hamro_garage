@@ -49,4 +49,6 @@ if (isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['u_i
 } else {
     echo "missing_coordinates";
 }
+
 ?>
+

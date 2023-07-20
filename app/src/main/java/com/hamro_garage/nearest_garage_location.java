@@ -117,6 +117,7 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
 
     }
 
+
     private void fetchGarageLocations() {
         // Make a request to fetch the garage locations from the server
         String URL = Endpoints.FETCH_LOCATIONS;
