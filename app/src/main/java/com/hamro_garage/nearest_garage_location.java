@@ -2,7 +2,7 @@ package com.hamro_garage;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -10,11 +10,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -31,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -38,14 +37,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class nearest_garage_location extends Fragment implements OnMapReadyCallback {
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
     private GoogleMap mMap;
     private LatLng garageLocation;
+    private JSONArray locationsArray;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
@@ -71,7 +68,7 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
                                 mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
                                 float zoomLevel = 10.0f;
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation,zoomLevel));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, zoomLevel));
                             }
                         }
                     });
@@ -114,9 +111,8 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
+        // Nothing to do here since we set the map ready callback in the member variable 'callback'
     }
-
 
     private void fetchGarageLocations() {
         // Make a request to fetch the garage locations from the server
@@ -147,11 +143,9 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
 
         queue.add(request);
     }
-
     private void processGarageLocations(JSONObject response) {
         try {
-            JSONArray locationsArray = response.getJSONArray("locations");
-            Toast.makeText(requireContext(), response.toString(), Toast.LENGTH_SHORT).show();
+            locationsArray = response.getJSONArray("locations");
             for (int i = 0; i < locationsArray.length(); i++) {
                 JSONObject locationObject = locationsArray.getJSONObject(i);
                 double latitude = locationObject.getDouble("latitude");
@@ -159,12 +153,44 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                 LatLng garageLatLng = new LatLng(latitude, longitude);
 
                 // Add marker for each garage location
-                mMap.addMarker(new MarkerOptions().position(garageLatLng).title("Garage Location"));
+                mMap.addMarker(new MarkerOptions().position(garageLatLng).title("Garage Location").snippet(String.valueOf(i)));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        // Add a marker click listener to the GoogleMap to handle the click event.
+//        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//            @Override
+//            public boolean onMarkerClick(Marker marker) {
+//                String snippet = marker.getSnippet();
+//                if (snippet != null && !snippet.isEmpty()) {
+//                    int index = Integer.parseInt(snippet);
+//                    openGarageDetailsActivity(index);
+//                }
+//                return true;
+//            }
+//        });
+
     }
+
+//    private void openGarageDetailsActivity(int index) {
+//        try {
+//            JSONObject locationObject = locationsArray.getJSONObject(index);
+//            double latitude = locationObject.getDouble("latitude");
+//            double longitude = locationObject.getDouble("longitude");
+//            // You can extract other details from locationObject like garage name, address, etc.
+//
+//            // Create an intent to start GarageDetailsActivity and pass the necessary data as extras.
+//            Intent intent = new Intent(requireContext(), GarageDetailsActivity.class);
+//            intent.putExtra("latitude", latitude);
+//            intent.putExtra("longitude", longitude);
+//            // Add other extras as needed.
+//            startActivity(intent);
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private String getUserId() {
         // Replace this with your user ID retrieval logic
