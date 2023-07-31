@@ -137,7 +137,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/edit"
         android:text="edit"
-
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:backgroundTint="@color/ssss"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="410dp"
         />
 
