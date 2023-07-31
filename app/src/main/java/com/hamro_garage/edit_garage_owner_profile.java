@@ -108,6 +108,8 @@ public class edit_garage_owner_profile extends AppCompatActivity {
         String address1=address.getText().toString().trim();
         String mobile1=mobile.getText().toString().trim();
         String email1=email.getText().toString().trim();
+        String Emailmatch = email.getText().toString().trim();
+        String Mobilematch = mobile.getText().toString().trim();
 
         if (fullname1.isEmpty()) {
             Toast.makeText(this, "name cannot be empty", Toast.LENGTH_SHORT).show();
@@ -121,16 +123,25 @@ public class edit_garage_owner_profile extends AppCompatActivity {
             Toast.makeText(this, "Please enter mobile", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (!Mobilematch.matches("^(97|98)\\d{8}$")) {
+            Toast.makeText(this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (email1.isEmpty()) {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!Emailmatch.matches("^[_A-Za-z0-9-]+(.[_A-Za-z0-9-]+)@[a-z]+(.[a-z]+)(.[a-z]{2,})$")) {
+            Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
             return;
         }
         StringRequest checkDuplicateRequest=new StringRequest(Request.Method.POST, url1,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        if (response.equals("success")){
+                        if (response.equals("Username or Email already registered!!")) {
+                            Toast.makeText(edit_garage_owner_profile.this, "Email or phone number already exists!", Toast.LENGTH_SHORT).show();
+                        } else if (response.equals("success")){
                             Toast.makeText(edit_garage_owner_profile.this,"Update successfully",Toast.LENGTH_SHORT).show();
                             retrieveData1();
 

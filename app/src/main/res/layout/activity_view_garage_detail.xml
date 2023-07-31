@@ -187,8 +187,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/edit"
         android:text="edit"
-        android:gravity="center"
-        android:layout_marginTop="450dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:backgroundTint="@color/ssss"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="460dp"
         />
 
 
