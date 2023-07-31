@@ -17,6 +17,8 @@ public class Endpoints {
     public static final String FETCH_LOCATIONS= BASE_URL + "fetch_locations.php";
     public static final String CREATEGARAGE= BASE_URL + "creategarage.php";
     public static final String get_garage_detail= BASE_URL + "get_garage_detail.php";
+
+    public static final String garage_detail_for_activity= BASE_URL + "get_garage_detail_activity.php";
     public static final String get_edit_garage_detail= BASE_URL + "edit_garage_detail.php";
     public static final String get_business= BASE_URL + "getbusiness.php";
     public static final String approve= BASE_URL + "approve.php";

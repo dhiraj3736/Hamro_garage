@@ -37,12 +37,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 public class nearest_garage_location extends Fragment implements OnMapReadyCallback {
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
     private GoogleMap mMap;
     private LatLng garageLocation;
     private JSONArray locationsArray;
+    private HashMap<Integer, JSONObject> garageDetailsMap; // Store garage details with index as key
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
@@ -143,9 +146,12 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
 
         queue.add(request);
     }
+
     private void processGarageLocations(JSONObject response) {
         try {
             locationsArray = response.getJSONArray("locations");
+            garageDetailsMap = new HashMap<>(); // Initialize the garage details HashMap
+
             for (int i = 0; i < locationsArray.length(); i++) {
                 JSONObject locationObject = locationsArray.getJSONObject(i);
                 double latitude = locationObject.getDouble("latitude");
@@ -153,44 +159,50 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                 LatLng garageLatLng = new LatLng(latitude, longitude);
 
                 // Add marker for each garage location
-                mMap.addMarker(new MarkerOptions().position(garageLatLng).title("Garage Location").snippet(String.valueOf(i)));
+                Marker marker = mMap.addMarker(new MarkerOptions().position(garageLatLng).title("Garage Location").snippet(String.valueOf(i)));
+
+                // Store the garage details in the HashMap using the marker index as the key
+                garageDetailsMap.put(i, locationObject);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         // Add a marker click listener to the GoogleMap to handle the click event.
-//        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-//            @Override
-//            public boolean onMarkerClick(Marker marker) {
-//                String snippet = marker.getSnippet();
-//                if (snippet != null && !snippet.isEmpty()) {
-//                    int index = Integer.parseInt(snippet);
-//                    openGarageDetailsActivity(index);
-//                }
-//                return true;
-//            }
-//        });
-
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String snippet = marker.getSnippet();
+                if (snippet != null && !snippet.isEmpty()) {
+                    int index = Integer.parseInt(snippet);
+                    JSONObject selectedGarageDetails = garageDetailsMap.get(index);
+                    openGarageDetailsActivity(selectedGarageDetails);
+                }
+                return true;
+            }
+        });
     }
 
-//    private void openGarageDetailsActivity(int index) {
-//        try {
-//            JSONObject locationObject = locationsArray.getJSONObject(index);
-//            double latitude = locationObject.getDouble("latitude");
-//            double longitude = locationObject.getDouble("longitude");
-//            // You can extract other details from locationObject like garage name, address, etc.
-//
-//            // Create an intent to start GarageDetailsActivity and pass the necessary data as extras.
-//            Intent intent = new Intent(requireContext(), GarageDetailsActivity.class);
-//            intent.putExtra("latitude", latitude);
-//            intent.putExtra("longitude", longitude);
-//            // Add other extras as needed.
-//            startActivity(intent);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private void openGarageDetailsActivity(JSONObject garageDetails) {
+        if (garageDetails != null) {
+            double latitude = 0.0;
+            double longitude = 0.0;
+            try {
+                latitude = garageDetails.getDouble("latitude");
+                longitude = garageDetails.getDouble("longitude");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            // Create an intent to start GarageDetailsActivity and pass the necessary data as extras.
+            Intent intent = new Intent(requireContext(), GarageDetailsActivity.class);
+            intent.putExtra("latitude", latitude);
+            intent.putExtra("longitude", longitude);
+            intent.putExtra("garageDetails", garageDetails.toString()); // Pass the garage details as a JSON string
+            startActivity(intent);
+        }
+    }
+
 
     private String getUserId() {
         // Replace this with your user ID retrieval logic
