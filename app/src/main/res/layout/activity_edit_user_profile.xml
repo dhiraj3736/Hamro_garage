@@ -133,13 +133,18 @@
             android:textSize="20sp"
             android:layout_marginStart="15dp" />
     </LinearLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/updatebtn"
         android:text="Update"
         android:onClick="update"
-        android:layout_marginTop="410dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:backgroundTint="@color/ssss"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="450dp"
         />
 
 

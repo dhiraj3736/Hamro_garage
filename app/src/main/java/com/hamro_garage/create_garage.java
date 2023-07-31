@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ public class create_garage extends AppCompatActivity {
     String sessionid;
     TextView addlocation;
     private static String url = Endpoints.CREATEGARAGE;
+    private static String url1 = Endpoints.checkgarageexit;
 
 
     @SuppressLint("WrongViewCast")
@@ -40,6 +42,44 @@ public class create_garage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_garage);
         createbtn = findViewById(R.id.createbtn);
+
+        StringRequest checkgarageexit=new StringRequest(Request.Method.POST, url1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("garage",""+response);
+                        if (response.equals("true")){
+                            createbtn.setVisibility(View.GONE);
+                            createbtn.setClickable(false);
+//
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(create_garage.this, "Error: " + error.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> data = new HashMap<>();
+
+                data.put("id", StaticValues.garageid);
+                return data;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(checkgarageexit);
+
+
+
+
+
+
         garagename = findViewById(R.id.garagename);
         time=findViewById(R.id.time);
         mobile=findViewById(R.id.mobileno);
@@ -63,6 +103,7 @@ public class create_garage extends AppCompatActivity {
 
     }
     public void save(View view){
+
         String garagename1 = garagename.getText().toString().trim();
         String time1 = time.getText().toString().trim();
         String mobile1 = mobile.getText().toString().trim();
@@ -70,8 +111,32 @@ public class create_garage extends AppCompatActivity {
         String location1 = location.getText().toString().trim();
         String status1="pending";
 
+        String Mobilematch = mobile.getText().toString().trim();
+        String status1="pending";
+
+
+        if (garagename1.isEmpty()) {
+            Toast.makeText(this, "Please enter garage name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (time1.isEmpty()) {
+            Toast.makeText(this, "Please enter time", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (mobile1.isEmpty()) {
+            Toast.makeText(this, "Please enter mobile no.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (service1.isEmpty()) {
             Toast.makeText(this, "Please enter services", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (location1.isEmpty()) {
+            Toast.makeText(this, "Please enter location", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!Mobilematch.matches("^(97|98)\\d{8}$")) {
+            Toast.makeText(this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
             return;
         }
         StringRequest checkDuplicateRequest=new StringRequest(Request.Method.POST, url,

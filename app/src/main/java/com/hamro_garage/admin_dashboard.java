@@ -14,6 +14,16 @@ LinearLayout business,userdetail;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
         business=findViewById(R.id.business);
+        userdetail=findViewById(R.id.user_detail);
+        userdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2=new Intent(admin_dashboard.this,view_all_user.class);
+//                intent1.putExtra("session_id",sessionid);
+                startActivity(intent2);
+
+            }
+        });
 
         business.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -23,5 +33,6 @@ LinearLayout business,userdetail;
                 startActivity(intent1);
             }
         });
+
     }
 }

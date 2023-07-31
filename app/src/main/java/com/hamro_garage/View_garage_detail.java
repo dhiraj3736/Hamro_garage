@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class View_garage_detail extends AppCompatActivity {
-    TextView garagename,time,mobile,service,location;
+    TextView garagename,time,mobile,service,location,status;
     Button button;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,11 +51,13 @@ public class View_garage_detail extends AppCompatActivity {
 
     public void retrieveData(){
         String status1="approve";
+
         garagename = findViewById(R.id.garage_name);
        time = findViewById(R.id.time);
         mobile = findViewById(R.id.mobile);
         service = findViewById(R.id.service);
         location=findViewById(R.id.location);
+        status=findViewById(R.id.status);
 
         String url = Endpoints.get_garage_detail;
 
@@ -78,6 +80,7 @@ public class View_garage_detail extends AppCompatActivity {
                             String mobile1=object.getString("mobile");
                             String service1=object.getString("service");
                             String location1=object.getString("location");
+                            String status2=object.getString("status");
 
 
                             garagename.setText(garagename1);
@@ -85,6 +88,7 @@ public class View_garage_detail extends AppCompatActivity {
                             mobile.setText(mobile1);
                             service.setText(service1);
                             location.setText(location1);
+                            status.setText(status2);
                         }
                     }
 
@@ -103,9 +107,8 @@ public class View_garage_detail extends AppCompatActivity {
         }) {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> data = new HashMap<>();
-
-                data.put("u_id", StaticValues.garageid);
                 data.put("status", status1);
+                data.put("u_id", StaticValues.garageid);
                 return data;
             }
         };

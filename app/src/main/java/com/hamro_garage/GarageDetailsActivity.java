@@ -1,6 +1,14 @@
 package com.hamro_garage;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.AuthFailureError;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +19,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -49,88 +67,67 @@ public class GarageDetailsActivity extends AppCompatActivity {
         }
 
         // Display the garage details
-        if (garageDetails != null) {
-            displayGarageDetails(garageDetails);
-        } else {
-            // Make a request to fetch the garage details from the server
-            fetchGarageDetails(latitude, longitude);
-        }
-    }
 
-    private void displayGarageDetails(JSONObject garageDetails) {
-        try {
-            // Parse the JSON response and extract the garage details
-            String garageName = garageDetails.getString("garage_name");
-            String mobile = garageDetails.getString("mobile");
-            String service = garageDetails.getString("service");
-            String location = garageDetails.getString("location");
-
-            // Set the garage details to the TextViews
-            garageNameTextView.setText("Garage Name: " + garageName);
-            mobileTextView.setText("Mobile: " + mobile);
-            serviceTextView.setText("Service: " + service);
-            locationTextView.setText("Location: " + location);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void fetchGarageDetails(double latitude, double longitude) {
         String URL = Endpoints.garage_detail_for_activity;
-
+        Log.d("latitude",""+String.valueOf(latitude));
+        Log.d("longitude",""+String.valueOf(longitude));
         // Create a JSON object with latitude and longitude to send in the POST request
-        JSONObject requestObject = new JSONObject();
-        try {
-            requestObject.put("latitude", latitude);
-            requestObject.put("longitude", longitude);
-            // You may also want to add an identifier for the specific garage (e.g., garage ID) here.
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
         // Make a POST request to your PHP API to fetch the garage details
         RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, requestObject,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // Process the response and extract the garage details
-                        processGarageDetailsResponse(response);
+        StringRequest request=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject= new JSONObject(response);
+                    String sucess= jsonObject.getString("success");
+                    JSONArray jsonArray= jsonObject.getJSONArray("data");
+
+                    if (sucess.equals("1")){
+//                retrieveData();
+                        for (int i=0;i<jsonArray.length();i++){
+                            JSONObject object=jsonArray.getJSONObject(i);
+                            String garage_name1=object.getString("garage_name");
+                            String mobile1=object.getString("mobile");
+                            String service1=object.getString("service");
+                            String location1=object.getString("location");
+
+
+                            garageNameTextView.setText(garage_name1);
+                            mobileTextView.setText(mobile1);
+                            serviceTextView.setText(service1);
+                            locationTextView.setText(location1);
+                        }
                     }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle the error response if needed
-                        Toast.makeText(GarageDetailsActivity.this, "Error fetching garage details", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> data = new HashMap<>();
+
+                data.put("latitude", String.valueOf(latitude));
+                data.put("longitude",String.valueOf(longitude));
+                return data;
+            }
+        };
 
         queue.add(request);
     }
 
-    private void processGarageDetailsResponse(JSONObject response) {
-        try {
-            // Check if the response has an error field
-            if (response.has("error")) {
-                String errorMessage = response.getString("error");
-                // Show an error message or handle the case where the garage details are not found
-                Toast.makeText(GarageDetailsActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-            } else {
-                // Parse the JSON response and extract the garage details
-                String garageName = response.getString("garage_name");
-                String mobile = response.getString("mobile");
-                String service = response.getString("service");
-                String location = response.getString("location");
 
-                // Set the garage details to the TextViews
-                garageNameTextView.setText("Garage Name: " + garageName);
-                mobileTextView.setText("Mobile: " + mobile);
-                serviceTextView.setText("Service: " + service);
-                locationTextView.setText("Location: " + location);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+
+
 }
+
