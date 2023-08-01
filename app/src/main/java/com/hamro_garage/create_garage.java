@@ -112,7 +112,6 @@ public class create_garage extends AppCompatActivity {
         String status1="pending";
 
         String Mobilematch = mobile.getText().toString().trim();
-        String status1="pending";
 
 
         if (garagename1.isEmpty()) {
