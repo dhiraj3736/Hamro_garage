@@ -5,6 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view_all_user">
+    <View
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_view"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+
+        android:text="All User"
+        android:textColor="#fff"
+        android:textSize="35sp"
+    />
 
     <GridView
         android:id="@+id/gridview"
@@ -12,7 +31,8 @@
         android:layout_height="match_parent"
         android:numColumns="2"
 
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/top_view"/>
 
 
 </RelativeLayout>

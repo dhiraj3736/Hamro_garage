@@ -11,9 +11,10 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text="id"
+       android:textColor="@color/ssss"
        android:textSize="20sp"
        android:textStyle="bold"
-      android:layout_marginTop="27dp"
+      android:layout_marginTop="35dp"
        android:layout_centerHorizontal="true" />
 
     <TextView
