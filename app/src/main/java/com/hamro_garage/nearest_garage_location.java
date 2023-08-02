@@ -87,7 +87,7 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                             if (location != null) {
                                 LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
                                 mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
-                                float zoomLevel = 10.0f;
+                                float zoomLevel = 13.0f;
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, zoomLevel));
 
                                 // Fetch and display garage locations
