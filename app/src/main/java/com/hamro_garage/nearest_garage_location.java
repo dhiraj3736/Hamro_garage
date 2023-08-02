@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.hamro_garage.GarageDetailsActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,10 +44,26 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
 
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
     private GoogleMap mMap;
-    private LatLng garageLocation;
     private JSONArray locationsArray;
     private HashMap<Integer, JSONObject> garageDetailsMap; // Store garage details with index as key
+    // Haversine class implementation
+    private static class Haversine {
 
+        private static final double EARTH_RADIUS = 6371; // Earth's radius in kilometers
+
+        public static double calculateDistance(double startLat, double startLng, double endLat, double endLng) {
+            double dLat = Math.toRadians(endLat - startLat);
+            double dLng = Math.toRadians(endLng - startLng);
+
+            double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(Math.toRadians(startLat)) * Math.cos(Math.toRadians(endLat)) *
+                            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            return EARTH_RADIUS * c;
+        }
+    }
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
@@ -72,12 +89,12 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                                 mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
                                 float zoomLevel = 10.0f;
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, zoomLevel));
+
+                                // Fetch and display garage locations
+                                fetchGarageLocations(currentLocation);
                             }
                         }
                     });
-
-            // Fetch and display garage locations
-            fetchGarageLocations();
         }
     };
 
@@ -117,7 +134,7 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
         // Nothing to do here since we set the map ready callback in the member variable 'callback'
     }
 
-    private void fetchGarageLocations() {
+    private void fetchGarageLocations(LatLng currentLocation) {
         // Make a request to fetch the garage locations from the server
         String URL = Endpoints.FETCH_LOCATIONS;
         RequestQueue queue = Volley.newRequestQueue(requireContext());
@@ -134,7 +151,7 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                     @Override
                     public void onResponse(JSONObject response) {
                         // Process the response and add markers for each garage location
-                        processGarageLocations(response);
+                        processGarageLocations(response, currentLocation);
                     }
                 },
                 new Response.ErrorListener() {
@@ -147,10 +164,13 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
         queue.add(request);
     }
 
-    private void processGarageLocations(JSONObject response) {
+    private void processGarageLocations(JSONObject response, LatLng currentLocation) {
         try {
             locationsArray = response.getJSONArray("locations");
             garageDetailsMap = new HashMap<>(); // Initialize the garage details HashMap
+
+            double minDistance = Double.MAX_VALUE;
+            LatLng nearestGarageLatLng = null;
 
             for (int i = 0; i < locationsArray.length(); i++) {
                 JSONObject locationObject = locationsArray.getJSONObject(i);
@@ -163,7 +183,22 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
 
                 // Store the garage details in the HashMap using the marker index as the key
                 garageDetailsMap.put(i, locationObject);
+
+                // Calculate distance using Haversine formula
+                double distance = Haversine.calculateDistance(currentLocation.latitude, currentLocation.longitude,
+                        garageLatLng.latitude, garageLatLng.longitude);
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    nearestGarageLatLng = garageLatLng;
+                }
             }
+
+            // Add a marker for the nearest garage
+            if (nearestGarageLatLng != null) {
+                mMap.addMarker(new MarkerOptions().position(nearestGarageLatLng).title("Nearest Garage"));
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -202,7 +237,6 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
             startActivity(intent);
         }
     }
-
 
     private String getUserId() {
         // Replace this with your user ID retrieval logic
