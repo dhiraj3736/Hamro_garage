@@ -7,12 +7,12 @@ if (isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['u_i
     $userId = $_POST['u_id'];
 
     // Check if the garage location already exists for the user
-    $checkQuery = "SELECT * FROM garage_location WHERE s_id = '$userId'";
+    $checkQuery = "SELECT * FROM garage_info WHERE s_id = '$userId'";
     $checkResult = mysqli_query($conn, $checkQuery);
 
     if (mysqli_num_rows($checkResult) > 0) {
         // Update the existing garage location
-        $updateQuery = "UPDATE garage_location SET latitude = '$latitude', longitude = '$longitude' WHERE s_id = '$userId'";
+        $updateQuery = "UPDATE garage_info SET latitude = '$latitude', longitude = '$longitude' WHERE s_id = '$userId'";
         $updateResult = mysqli_query($conn, $updateQuery);
 
         if ($updateResult) {
@@ -22,7 +22,7 @@ if (isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['u_i
         }
     } else {
         // Insert a new garage location
-        $insertQuery = "INSERT INTO garage_location (latitude, longitude, s_id) VALUES ('$latitude', '$longitude', '$userId')";
+        $insertQuery = "INSERT INTO garage_info (latitude, longitude, s_id) VALUES ('$latitude', '$longitude', '$userId')";
         $insertResult = mysqli_query($conn, $insertQuery);
 
         if ($insertResult) {
@@ -35,7 +35,7 @@ if (isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['u_i
     $userId = $_POST['u_id'];
 
     // Retrieve the garage location for the user
-    $retrieveQuery = "SELECT latitude, longitude FROM garage_location WHERE s_id = '$userId'";
+    $retrieveQuery = "SELECT latitude, longitude FROM garage_info WHERE s_id = '$userId'";
     $retrieveResult = mysqli_query($conn, $retrieveQuery);
 
     if (mysqli_num_rows($retrieveResult) > 0) {

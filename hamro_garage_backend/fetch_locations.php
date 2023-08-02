@@ -4,7 +4,7 @@ include 'validate.php';
 
 // $userid = $_POST['u_id']; // Assuming the user ID is sent via POST request
 
-$sql = "SELECT latitude, longitude FROM garage_location";
+$sql = "SELECT latitude, longitude FROM garage_info";
 $result = $conn->query($sql);
 
 $locations = array();
