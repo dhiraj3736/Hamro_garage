@@ -6,17 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".OwnerMapFragment">
 
-    <View
-        android:id="@+id/top_view"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/bg_view" />
+
 
     <FrameLayout
         android:id="@+id/map_container"
         android:layout_width="match_parent"
-        android:layout_marginTop="216dp"
-        android:layout_height="350dp"
+        android:layout_marginTop="190dp"
+        android:layout_height="600dp"
         android:layout_alignParentTop="true">
 
         <fragment
@@ -26,6 +22,12 @@
             android:layout_height="match_parent" />
 
     </FrameLayout>
+    <View
+        android:id="@+id/top_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_view" />
+
     <TextView
         android:id="@+id/textv"
         android:layout_width="wrap_content"

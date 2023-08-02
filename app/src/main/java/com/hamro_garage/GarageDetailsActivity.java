@@ -6,6 +6,9 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,9 @@ public class GarageDetailsActivity extends AppCompatActivity {
     private TextView mobileTextView;
     private TextView serviceTextView;
     private TextView locationTextView;
+    Button call,submitfeedbackbtn;
+    EditText feedbackedittext;
+    String garage_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,9 @@ public class GarageDetailsActivity extends AppCompatActivity {
         mobileTextView = findViewById(R.id.mobileTextView);
         serviceTextView = findViewById(R.id.serviceTextView);
         locationTextView = findViewById(R.id.locationTextView);
+        call=findViewById(R.id.callbut);
+        feedbackedittext = findViewById(R.id.feedbackedittext);
+        submitfeedbackbtn = findViewById(R.id.submitfeedbackbtn);
 
         // Retrieve the latitude and longitude from the intent
         double latitude = getIntent().getDoubleExtra("latitude", 0.0);
@@ -85,6 +94,7 @@ public class GarageDetailsActivity extends AppCompatActivity {
                             String mobile1 = object.getString("mobile");
                             String service1 = object.getString("service");
                             String location1 = object.getString("location");
+                             garage_id = object.getString("id");
 
                             garageNameTextView.setText(garage_name1);
                             mobileTextView.setText(mobile1);
@@ -114,8 +124,47 @@ public class GarageDetailsActivity extends AppCompatActivity {
 
         queue.add(request);
 
+        submitfeedbackbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String feedback = feedbackedittext.getText().toString();
+                String customer_id = StaticValues.garageid;
+
+                StringRequest request = new StringRequest(Request.Method.POST, Endpoints.save_feedback, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                            if (response.equals("success")) {
+                                Toast.makeText(GarageDetailsActivity.this, "Feedback added successfully", Toast.LENGTH_SHORT).show();
+                                feedbackedittext.setText("");
+                            }
+                            else {
+                                Toast.makeText(GarageDetailsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            }
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }){
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String,String> data=new HashMap<>();
+                        data.put("customer_id", customer_id);
+                        data.put("garage_id",garage_id);
+                        data.put("feedback", feedback);
+                        return data;
+                    }
+                };
+                RequestQueue requestQueue=Volley.newRequestQueue(GarageDetailsActivity.this);
+                requestQueue.add(request);
+            }
+        });
         // Set a click listener on the mobileTextView to initiate a phone call
-        mobileTextView.setOnClickListener(v -> {
+        call.setOnClickListener(v -> {
             String mobileNumber = mobileTextView.getText().toString();
             if (!mobileNumber.isEmpty()) {
                 // Remove any non-digit characters (e.g., spaces, hyphens)
