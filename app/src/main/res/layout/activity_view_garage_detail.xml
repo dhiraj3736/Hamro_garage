@@ -1,199 +1,246 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View_garage_detail">
-
-    <View
-        android:id="@+id/top_view"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/bg_view" />
+        android:layout_height="match_parent"
 
-    <TextView
-        android:id="@+id/textv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:text="Garage Detail"
-        android:textColor="@color/white"
-        android:textSize="36sp"
-        android:textStyle="bold" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        >
+        tools:context=".View_garage_detail">
+
+        <View
+            android:id="@+id/top_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/bg_view"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginTop="-50dp"
+            android:layout_marginBottom="500dp"
+            android:text="garage detail"
+            android:textColor="#fff"
+            android:textSize="35sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
 
         <TextView
             android:id="@+id/garage_name_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Garage Name:"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="60dp" />
-        <TextView
-            android:id="@+id/garage_name"
-            android:layout_width="wrap_content"
+
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Garage Name"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="15dp" />
-    </LinearLayout>
+            android:textColor="@color/ssss"
+            android:textSize="25sp"
+            android:gravity="center"
 
+            android:layout_marginTop="135dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="280dp"
-        >
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/garage_name"
+            android:layout_marginEnd="45dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/time_textview"
 
-            android:text="Time:"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginStart="60dp"/>
-
-
+            android:layout_marginStart="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/garage_name_textview"
+            />
         <TextView
-
-            android:layout_width="wrap_content"
+            android:id="@+id/time_textview"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Time"
             android:textStyle="bold"
+            android:textColor="@color/ssss"
+            android:textSize="25sp"
+            android:layout_marginStart="-20dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/garage_name"/>
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_marginEnd="45dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:id="@+id/time"
-            android:layout_marginStart="15dp" />
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="310dp"
-        >
+            android:layout_marginStart="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_textview"
+            />
 
         <TextView
             android:id="@+id/mobile_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mobile:"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="60dp" />
-        <TextView
-            android:id="@+id/mobile"
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mobile"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="15dp" />
-    </LinearLayout>
+            android:textColor="@color/ssss"
+            android:textSize="25sp"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
-        >
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time"/>
+
+        <TextView
+            android:id="@+id/mobile"
+            android:layout_marginEnd="45dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="21sp"
+            android:layout_marginStart="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mobile_textview"
+            />
 
         <TextView
             android:id="@+id/service_textview"
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Service:"
+            android:text="Service Name:"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="60dp" />
-        <TextView
-            android:id="@+id/service"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="service"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="15dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="370dp"
-        >
+            android:textColor="@color/ssss"
+            android:textSize="25sp"
+
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mobile"/>
 
         <TextView
-            android:id="@+id/location_textview"
-            android:layout_width="wrap_content"
+            android:id="@+id/service"
+            android:layout_marginEnd="45dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Location:"
+
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="60dp" />
+            android:textSize="21sp"
+            android:layout_marginStart="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service_textview"
+            />
         <TextView
-            android:id="@+id/location"
-            android:layout_width="wrap_content"
+            android:id="@+id/location_textview"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Location"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="15dp" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
-        >
+            android:textColor="@color/ssss"
+            android:textSize="25sp"
+
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service"/>
 
         <TextView
+            android:id="@+id/location"
+            android:layout_marginEnd="45dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginStart="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location_textview"
+            />
+        <TextView
             android:id="@+id/status_textview"
-            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Status:"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginStart="60dp" />
+            android:textColor="@color/ssss"
+            android:textSize="25sp"
+
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/location" />
         <TextView
             android:id="@+id/status"
-            android:layout_width="wrap_content"
+            android:layout_marginEnd="45dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="status"
+
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginStart="15dp" />
-    </LinearLayout>
+            android:layout_marginStart="45dp"
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/edit"
-        android:text="edit"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:backgroundTint="@color/ssss"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="460dp"
-        />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/status_textview"
+            />
 
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit"
+            android:text="edit"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:backgroundTint="@color/ssss"
+            android:layout_marginStart="-20dp"
 
-</RelativeLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/status"
+            />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
