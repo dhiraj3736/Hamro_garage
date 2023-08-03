@@ -240,6 +240,7 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
             Intent intent = new Intent(requireContext(), GarageDetailsActivity.class);
             intent.putExtra("latitude", latitude);
             intent.putExtra("longitude", longitude);
+            intent.putExtra("Source","Map");
             intent.putExtra("garageDetails", garageDetails.toString()); // Pass the garage details as a JSON string
             startActivity(intent);
         }

@@ -50,7 +50,7 @@
             android:textSize="25sp"
             android:gravity="center"
 
-            android:layout_marginTop="135dp"
+            android:layout_marginTop="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textview"/>
@@ -80,7 +80,7 @@
             android:textColor="@color/ssss"
             android:textSize="25sp"
             android:layout_marginStart="-20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/garage_name"/>
@@ -111,7 +111,7 @@
             android:textColor="@color/ssss"
             android:textSize="25sp"
 
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time"/>
@@ -142,7 +142,7 @@
             android:textColor="@color/ssss"
             android:textSize="25sp"
 
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mobile"/>
@@ -172,7 +172,7 @@
             android:textColor="@color/ssss"
             android:textSize="25sp"
 
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/service"/>
@@ -202,7 +202,7 @@
             android:textColor="@color/ssss"
             android:textSize="25sp"
 
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/location" />
@@ -233,7 +233,7 @@
             android:textSize="20sp"
             android:backgroundTint="@color/ssss"
             android:layout_marginStart="-20dp"
-
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/status"
