@@ -4,7 +4,7 @@ public class Endpoints {
 
 
 
-    private static final String BASE_URL = "http://192.168.1.8/hamro_garage_backend/";
+    private static final String BASE_URL = "http://192.168.3.179/hamro_garage_backend/";
 
     public static final String SIGNUP_URL = BASE_URL + "user_signup.php";
     public static final String LOGIN_URL = BASE_URL + "user_login.php";
@@ -24,5 +24,9 @@ public class Endpoints {
     public static final String get_user_detail= BASE_URL + "getuserdeteil.php";
     public static final String garage_detail_for_activity= BASE_URL + "get_garage_detail_activity.php";
     public static final String checkgarageexit= BASE_URL + "garagestatus.php";
+
+    public static final String Search_Garage = BASE_URL + "search_garage.php";
+    public static final String save_feedback= BASE_URL + "save_feedback.php";
+
 
 }

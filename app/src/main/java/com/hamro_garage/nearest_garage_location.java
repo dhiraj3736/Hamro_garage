@@ -1,6 +1,7 @@
 package com.hamro_garage;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,7 +46,8 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
     private static final int PERMISSIONS_REQUEST_LOCATION = 1;
     private GoogleMap mMap;
     private JSONArray locationsArray;
-    private HashMap<Integer, JSONObject> garageDetailsMap; // Store garage details with index as key
+    private HashMap<Integer, JSONObject> garageDetailsMap;
+    private ProgressDialog progressDialog;// Store garage details with index as key
     // Haversine class implementation
     private static class Haversine {
 
@@ -135,6 +137,9 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
     }
 
     private void fetchGarageLocations(LatLng currentLocation) {
+        progressDialog = new ProgressDialog(requireContext());
+        progressDialog.setMessage("Please wait.....");
+        progressDialog.show();
         // Make a request to fetch the garage locations from the server
         String URL = Endpoints.FETCH_LOCATIONS;
         RequestQueue queue = Volley.newRequestQueue(requireContext());
@@ -150,6 +155,7 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        progressDialog.dismiss();
                         // Process the response and add markers for each garage location
                         processGarageLocations(response, currentLocation);
                     }
@@ -157,6 +163,7 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
                         // Handle the error response if needed
                     }
                 });
@@ -242,5 +249,12 @@ public class nearest_garage_location extends Fragment implements OnMapReadyCallb
         // Replace this with your user ID retrieval logic
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         return sharedPreferences.getString("user_id", ""); // Provide a default value if user ID is not found
+    }
+    public void onDestroy() {
+        super.onDestroy();
+        // Dismiss the ProgressDialog if it is still showing to avoid WindowLeaked Exception.
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
     }
 }
