@@ -20,6 +20,7 @@
         android:theme="@style/Theme.Hamro_garage"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".GarageDetailsActivity"
             android:exported="false" />

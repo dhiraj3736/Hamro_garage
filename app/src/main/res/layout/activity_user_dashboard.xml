@@ -6,16 +6,12 @@
     tools:context=".user_dashboard">
 
 
-
-
-
-
     <FrameLayout
         android:id="@+id/map_container"
         android:layout_width="match_parent"
-        android:layout_marginTop="120dp"
         android:layout_height="600dp"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="120dp">
 
         <fragment
             android:id="@+id/map"
@@ -30,40 +26,40 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="2"
+        android:layout_alignParentBottom="true"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
-        android:layout_alignParentBottom="true">
+        android:columnCount="2"
+        android:rowCount="2">
 
 
         <androidx.cardview.widget.CardView
 
-            app:cardCornerRadius="15dp"
-            app:cardElevation="12dp"
-            android:layout_rowWeight="1"
             android:layout_row="1"
+            android:layout_rowWeight="1"
             android:layout_column="0"
-            android:layout_margin="12dp">
+            android:layout_margin="12dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp">
 
             <LinearLayout
                 android:id="@+id/bikebtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/baseline_electric_bike_24"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/baseline_electric_bike_24" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nearest Workshop"
                     android:layout_gravity="center_horizontal"
+                    android:text="Nearest Workshop"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -72,21 +68,21 @@
         </androidx.cardview.widget.CardView>
 
 
-
         <androidx.cardview.widget.CardView
 
-            app:cardCornerRadius="15dp"
-            app:cardElevation="12dp"
-            android:layout_rowWeight="1"
             android:layout_row="1"
+            android:layout_rowWeight="1"
             android:layout_column="1"
-            android:layout_margin="12dp">
+            android:layout_margin="12dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="12dp">
+
             <LinearLayout
                 android:id="@+id/profilebtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <ImageView
 
@@ -110,16 +106,12 @@
     </GridLayout>
 
 
-
-
-
-
-
     <View
         android:id="@+id/top_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@drawable/bg_view"/>
+        android:background="@drawable/bg_view" />
+
     <TextView
         android:id="@+id/textv"
         android:layout_width="wrap_content"
@@ -130,7 +122,18 @@
         android:textColor="@color/white"
         android:textSize="36sp"
         android:textStyle="bold" />
+
     <!-- I have done this following code inorder to add search button  -->
+
+    <ImageView
+        android:id="@+id/moreOptions"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/baseline_more_vert_24" />
+
     <SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"

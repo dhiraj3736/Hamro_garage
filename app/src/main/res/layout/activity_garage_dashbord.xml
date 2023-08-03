@@ -100,7 +100,7 @@
             app:cardElevation="12dp">
 
             <LinearLayout
-                android:id="@+id/addlocationbtn"
+                android:id="@+id/showfeedbackbtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Add Location"
+                    android:text="Show Feedback"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -135,6 +135,14 @@
         android:textColor="@color/white"
         android:textSize="36sp"
         android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/moreOptions"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/baseline_more_vert_24" />
     <com.google.android.material.card.MaterialCardView
         android:layout_width="170dp"
         android:layout_height="50dp"
