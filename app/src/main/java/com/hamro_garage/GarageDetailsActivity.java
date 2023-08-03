@@ -56,73 +56,77 @@ public class GarageDetailsActivity extends AppCompatActivity {
         feedbackedittext = findViewById(R.id.feedbackedittext);
         submitfeedbackbtn = findViewById(R.id.submitfeedbackbtn);
 
+        String Source=getIntent().getStringExtra("Source");
         // Retrieve the latitude and longitude from the intent
-        double latitude = getIntent().getDoubleExtra("latitude", 0.0);
-        double longitude = getIntent().getDoubleExtra("longitude", 0.0);
+        if(Source.equals("Map")) {
+            double latitude = getIntent().getDoubleExtra("latitude", 0.0);
+            double longitude = getIntent().getDoubleExtra("longitude", 0.0);
 
-        // Retrieve the garage details from the intent extras
-        String garageDetailsString = getIntent().getStringExtra("garageDetails");
-        JSONObject garageDetails;
-        try {
-            garageDetails = new JSONObject(garageDetailsString);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            garageDetails = null;
-        }
+            // Retrieve the garage details from the intent extras
+            String garageDetailsString = getIntent().getStringExtra("garageDetails");
+            JSONObject garageDetails;
+            try {
+                garageDetails = new JSONObject(garageDetailsString);
+            } catch (JSONException e) {
+                e.printStackTrace();
+                garageDetails = null;
+            }
 
-        // Display the garage details
+            // Display the garage details
 
-        String URL = Endpoints.garage_detail_for_activity;
-        Log.d("latitude", "" + String.valueOf(latitude));
-        Log.d("longitude", "" + String.valueOf(longitude));
-        // Create a JSON object with latitude and longitude to send in the POST request
+            String URL = Endpoints.garage_detail_for_activity;
+            Log.d("latitude", "" + String.valueOf(latitude));
+            Log.d("longitude", "" + String.valueOf(longitude));
+            // Create a JSON object with latitude and longitude to send in the POST request
 
-        // Make a POST request to your PHP API to fetch the garage details
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String success = jsonObject.getString("success");
-                    JSONArray jsonArray = jsonObject.getJSONArray("data");
+            // Make a POST request to your PHP API to fetch the garage details
+            RequestQueue queue = Volley.newRequestQueue(this);
+            StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String success = jsonObject.getString("success");
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-                    if (success.equals("1")) {
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject object = jsonArray.getJSONObject(i);
-                            String garage_name1 = object.getString("garage_name");
-                            String mobile1 = object.getString("mobile");
-                            String service1 = object.getString("service");
-                            String location1 = object.getString("location");
-                             garage_id = object.getString("id");
+                        if (success.equals("1")) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject object = jsonArray.getJSONObject(i);
+                                String garage_name1 = object.getString("garage_name");
+                                String mobile1 = object.getString("mobile");
+                                String service1 = object.getString("service");
+                                String location1 = object.getString("location");
+                                garage_id = object.getString("id");
 
-                            garageNameTextView.setText(garage_name1);
-                            mobileTextView.setText(mobile1);
-                            serviceTextView.setText(service1);
-                            locationTextView.setText(location1);
+                                garageNameTextView.setText(garage_name1);
+                                mobileTextView.setText(mobile1);
+                                serviceTextView.setText(service1);
+                                locationTextView.setText(location1);
+                            }
                         }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        }) {
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> data = new HashMap<>();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            }) {
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> data = new HashMap<>();
+                    data.put("latitude", String.valueOf(latitude));
+                    data.put("longitude", String.valueOf(longitude));
+                    return data;
+                }
+            };
 
-                data.put("latitude", String.valueOf(latitude));
-                data.put("longitude", String.valueOf(longitude));
-                return data;
-            }
-        };
-
-        queue.add(request);
+            queue.add(request);
+        }else if(Source.equals("Search")){
+            //Search API
+        }
 
         submitfeedbackbtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,17 +1,21 @@
 package com.hamro_garage;
 
 import android.app.Dialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,26 +28,34 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.card.MaterialCardView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class user_dashboard extends AppCompatActivity {
 
     LinearLayout ubike;
     LinearLayout user_profile;
-    SearchView searchView;
+    EditText searchView;
+    MaterialCardView searchBtn;
+    String searchText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +65,65 @@ public class user_dashboard extends AppCompatActivity {
         ubike = findViewById(R.id.bikebtn);
         user_profile = findViewById(R.id.profilebtn);
         searchView = findViewById(R.id.searchView);
+        searchBtn=findViewById(R.id.searchBtn);
 
+
+    searchBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Log.d("Search","Search Button");
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+            String URL=Endpoints.getSearchAPI;
+            StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Log.d("Response",""+response);
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String success = jsonObject.getString("success");
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            }) {
+                @Nullable
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> data = new HashMap<>();
+                    data.put("searchText", String.valueOf(searchText));
+                    return data;
+                }
+            };
+
+            queue.add(request);
+
+        }
+    });
+
+        searchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                searchText = charSequence.toString();
+                Log.d("Updated Text",""+searchText);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -79,57 +149,7 @@ public class user_dashboard extends AppCompatActivity {
         });
 
         // Set up the SearchView listener to handle search queries
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
 
-                // Create a request to search the database using the PHP API
-                String URL = Endpoints.Search_Garage;
-                RequestQueue queue = Volley.newRequestQueue(user_dashboard.this);
-
-                JSONObject requestObject = new JSONObject();
-                try {
-                    requestObject.put("search_query", query);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, requestObject,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-
-                                // Process the response and extract search results as a List<String>
-                                List<String> searchResults = extractSearchResultsFromResponse(response);
-
-                                // After receiving the search results, show them in a dialog
-                                showSearchResultsDialog(searchResults);
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // Handle the error response if needed
-                                String errorMessage = "Unknown error";
-                                if (error.networkResponse != null && error.networkResponse.data != null) {
-                                    errorMessage = new String(error.networkResponse.data);
-                                }
-                                Log.e("VolleyError", errorMessage);
-                                Toast.makeText(user_dashboard.this, "Error fetching search results.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                );
-
-                queue.add(request);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                // Handle any search query text changes here (if needed)
-                return false;
-            }
-        });
     }
 
     // Method to show the search results in a dialog
