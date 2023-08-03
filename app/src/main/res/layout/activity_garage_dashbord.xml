@@ -135,6 +135,14 @@
         android:textColor="@color/white"
         android:textSize="36sp"
         android:textStyle="bold" />
+    <ImageView
+        android:id="@+id/moreOptions"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/baseline_more_vert_24" />
     <com.google.android.material.card.MaterialCardView
         android:layout_width="170dp"
         android:layout_height="50dp"

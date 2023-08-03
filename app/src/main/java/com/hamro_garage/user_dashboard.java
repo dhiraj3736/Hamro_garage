@@ -1,10 +1,18 @@
 package com.hamro_garage;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -56,6 +64,8 @@ public class user_dashboard extends AppCompatActivity {
     MaterialCardView searchBtn;
     String searchText;
 
+
+    ImageView moreOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,11 +134,14 @@ public class user_dashboard extends AppCompatActivity {
 
             }
         });
+        moreOptions=findViewById(R.id.moreOptions);
+        registerForContextMenu(moreOptions);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         Fragment myFragment = new UserMapsFragment();
         fragmentTransaction.add(R.id.map, myFragment);
+
 
         ubike.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -195,6 +208,40 @@ public class user_dashboard extends AppCompatActivity {
 
         // Show the dialog
         searchResultsDialog.show();
+    }
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.menu, menu);
+    }
+    public boolean onContextItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            AlertDialog.Builder builder=new AlertDialog.Builder(user_dashboard.this);
+            builder.setTitle("Logout");
+            builder.setMessage("Do you want to log out?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    SharedPreferences sharedPreferences=getSharedPreferences("HamroGarage", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.remove("userType");
+                    editor.remove("session_id");
+                    editor.commit();
+                    Intent intent=new Intent(user_dashboard.this,chooseuser.class);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog dialog=builder.create();
+            dialog.show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // Method to extract search results from the JSON response

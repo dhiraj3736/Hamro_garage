@@ -3,11 +3,18 @@ package com.hamro_garage;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +37,9 @@ import java.util.Map;
 
 public class garage_dashbord extends AppCompatActivity {
     LinearLayout garagedetail,addlocation,creategarage;
-String sessionid;
-TextView profilebtn;
+    String sessionid;
+    TextView profilebtn;
+    ImageView moreOptions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +49,9 @@ TextView profilebtn;
         addlocation=findViewById(R.id.addlocationbtn);
         profilebtn=findViewById(R.id.profilebtn);
         creategarage=findViewById(R.id.creategarage);
+        moreOptions=findViewById(R.id.moreOptions);
+        registerForContextMenu(moreOptions);
+
         String url=Endpoints.getgarageid;
 
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -121,5 +132,39 @@ TextView profilebtn;
                 startActivity(intent);
             }
         });
+    }
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.menu, menu);
+    }
+    public boolean onContextItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            AlertDialog.Builder builder=new AlertDialog.Builder(garage_dashbord.this);
+            builder.setTitle("Logout");
+            builder.setMessage("Do you want to log out?");
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    SharedPreferences sharedPreferences=getSharedPreferences("HamroGarage", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    editor.remove("userType");
+                    editor.remove("session_id");
+                    editor.commit();
+                    Intent intent=new Intent(garage_dashbord.this,chooseuser.class);
+                    startActivity(intent);
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog dialog=builder.create();
+            dialog.show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

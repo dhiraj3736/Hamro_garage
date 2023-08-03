@@ -19,7 +19,8 @@
             android:id="@+id/map"
             android:name="com.hamro_garage.nearest_garage_location"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:layout="@layout/fragment_user_maps" />
 
     </FrameLayout>
 
