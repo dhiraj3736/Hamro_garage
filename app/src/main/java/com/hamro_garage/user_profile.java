@@ -48,6 +48,11 @@ public class user_profile extends AppCompatActivity {
         });
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        retrieveData();
+    }
 
     public void retrieveData(){
 
@@ -69,7 +74,7 @@ public class user_profile extends AppCompatActivity {
                     JSONArray jsonArray= jsonObject.getJSONArray("data");
 
                     if (sucess.equals("1")){
-                        retrieveData();
+
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject object=jsonArray.getJSONObject(i);
                             String fullname1=object.getString("fullname");

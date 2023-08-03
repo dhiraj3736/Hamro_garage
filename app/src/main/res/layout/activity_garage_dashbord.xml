@@ -100,7 +100,7 @@
             app:cardElevation="12dp">
 
             <LinearLayout
-                android:id="@+id/showfeedbackbtn"
+                android:id="@+id/addlocationbtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -116,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Show Feedback"
+                    android:text="feedback"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />

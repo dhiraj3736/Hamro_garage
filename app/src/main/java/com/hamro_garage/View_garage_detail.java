@@ -49,6 +49,12 @@ public class View_garage_detail extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        retrieveData();
+    }
+
     public void retrieveData(){
         String status1="approve";
 
@@ -72,7 +78,7 @@ public class View_garage_detail extends AppCompatActivity {
                     JSONArray jsonArray= jsonObject.getJSONArray("data");
 
                     if (sucess.equals("1")){
-                        retrieveData();
+
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject object=jsonArray.getJSONObject(i);
                             String garagename1=object.getString("garage_name");
