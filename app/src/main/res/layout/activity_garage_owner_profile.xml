@@ -36,6 +36,25 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="@color/black"
+            app:strokeWidth="3dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/mcard"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_view"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginStart="10dp"
+                >
 
 
         <TextView
@@ -50,10 +69,10 @@
             android:textSize="25sp"
             android:gravity="center"
 
-            android:layout_marginTop="135dp"
+            android:layout_marginTop="25dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview"/>
+            />
 
         <TextView
             android:id="@+id/full_name"
@@ -158,11 +177,14 @@
             android:textColor="@color/black"
             android:textSize="21sp"
             android:layout_marginStart="45dp"
+            android:layout_marginBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_textview"
             />
 
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <Button
             android:layout_width="wrap_content"
@@ -176,7 +198,7 @@
             android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email"
+            app:layout_constraintTop_toBottomOf="@+id/mcard"
             />
 
 
