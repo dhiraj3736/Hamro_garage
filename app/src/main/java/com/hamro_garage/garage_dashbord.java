@@ -80,7 +80,13 @@ public class garage_dashbord extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(garage_dashbord.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                String errorMessage = error.getMessage();
+                if (errorMessage != null && !errorMessage.isEmpty()) {
+                    Toast.makeText(garage_dashbord.this, errorMessage, Toast.LENGTH_SHORT).show();
+                } else {
+                    // If the error message is null or empty, you can provide a default error message.
+                    Toast.makeText(garage_dashbord.this, "An error occurred.", Toast.LENGTH_SHORT).show();
+                }
             }
         }){
             @Nullable

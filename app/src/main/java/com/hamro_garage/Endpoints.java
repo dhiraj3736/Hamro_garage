@@ -27,6 +27,8 @@ public class Endpoints {
 
     public static final String Search_Garage = BASE_URL + "search_garage.php";
     public static final String save_feedback= BASE_URL + "save_feedback.php";
-
+    public static final String getfeedback= BASE_URL + "getfeedback.php";
+    public static final String getgarageid= BASE_URL + "get_garage_id.php";
+    public static final String getSearchAPI= BASE_URL + "searchAPI.php";
 
 }
