@@ -2,7 +2,6 @@ package com.hamro_garage;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -11,16 +10,12 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,20 +26,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.card.MaterialCardView;
+import com.hamro_garage.model.SearchSuggestions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,7 +56,13 @@ public class user_dashboard extends AppCompatActivity {
     EditText searchView;
     MaterialCardView searchBtn;
     String searchText;
-
+    ArrayList<SearchSuggestions> suggestionsList;
+    ListView suggestionsListView;
+    ListView resultListView;
+    ArrayList<String> onlyLocationSuggestion;
+    ArrayList<String > resultOfSearch;
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> resultAdapter;
 
     ImageView moreOptions;
 
@@ -76,27 +75,127 @@ public class user_dashboard extends AppCompatActivity {
         user_profile = findViewById(R.id.profilebtn);
         searchView = findViewById(R.id.searchView);
         searchBtn=findViewById(R.id.searchBtn);
+        suggestionsListView=findViewById(R.id.suggestionList);
+        resultListView=findViewById(R.id.resultListView);
+        suggestionsListView.setVisibility(View.GONE);
+        suggestionsListView.setClickable(false);
+        resultListView.setVisibility(View.GONE);
+        resultListView.setClickable(false);
+
+        suggestionsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                searchView.setText(adapterView.getItemAtPosition(i).toString());
+                suggestionsListView.setVisibility(View.GONE);
+                suggestionsListView.setClickable(false);
+            }
+        });
+
+        resultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String garage_name=adapterView.getItemAtPosition(i).toString();
+                Log.d("GarageName","The Name is: "+garage_name);
+                resultListView.setVisibility(View.GONE);
+                resultListView.setClickable(false);
+                Intent intent = new Intent(getApplicationContext(), GarageDetailsActivity.class);
+                intent.putExtra("garage_name",garage_name);
+                intent.putExtra("Source","Search");// Pass the garage details as a JSON string
+                startActivity(intent);
+            }
+        });
+
+        suggestionsList=new ArrayList<SearchSuggestions>();
+        onlyLocationSuggestion=new ArrayList<>();
+        resultOfSearch=new ArrayList<>();
+
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String URL=Endpoints.getSearchSuggestions;
+        suggestionsList.clear();
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                Log.d("Response",""+response);
+                try {
+//                        JSONObject jsonObject = new JSONObject(response);
+                    JSONObject parentObject=new JSONObject(response);
+                    JSONArray jsonArray=parentObject.getJSONArray("data");
+                    for(int i=0;i<jsonArray.length();i++){
+                        JSONObject value=jsonArray.getJSONObject(i);
+                        onlyLocationSuggestion.add(value.getString("location"));
 
 
-    searchBtn.setOnClickListener(new View.OnClickListener() {
+
+                    }
+//                        String success = jsonObject.getString("success");
+//                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, onlyLocationSuggestion);
+                suggestionsListView.setAdapter(adapter);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+//                @Nullable
+//                @Override
+//                protected Map<String, String> getParams() throws AuthFailureError {
+//                    Map<String, String> data = new HashMap<>();
+//                    data.put("searchText", String.valueOf(searchText));
+//                    return data;
+//                }
+        };
+
+        queue.add(request);
+
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Log.d("Search","Search Button");
-            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-            String URL=Endpoints.getSearchAPI;
-            StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            resultOfSearch.clear();
+            suggestionsListView.setVisibility(View.GONE);
+            suggestionsListView.setClickable(false);
+
+            String algorithmURL=Endpoints.implementSearchAlgorithm;
+            suggestionsList.clear();
+            StringRequest request = new StringRequest(Request.Method.POST, algorithmURL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+
                     Log.d("Response",""+response);
                     try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        String success = jsonObject.getString("success");
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+//                        JSONObject jsonObject = new JSONObject(response);
+                        JSONObject parentObject=new JSONObject(response);
+                        JSONArray jsonArray=parentObject.getJSONArray("data");
+                        for(int i=0;i<jsonArray.length();i++){
+                            JSONObject value=jsonArray.getJSONObject(i);
+                            resultOfSearch.add(value.getString("garage_name"));
+
+
+
+                        }
+//                        String success = jsonObject.getString("success");
+//                        JSONArray jsonArray = jsonObject.getJSONArray("data");
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+
+                    resultAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, resultOfSearch);
+                    resultListView.setAdapter(resultAdapter);
+                    resultListView.setVisibility(View.VISIBLE);
+                    resultListView.setClickable(true);
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -107,7 +206,8 @@ public class user_dashboard extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> data = new HashMap<>();
-                    data.put("searchText", String.valueOf(searchText));
+                    data.put("searchText", searchView.getText().toString());
+                    Log.d("SearchText",searchView.getText().toString());
                     return data;
                 }
             };
@@ -126,7 +226,15 @@ public class user_dashboard extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 searchText = charSequence.toString();
-                Log.d("Updated Text",""+searchText);
+                if(searchText.isEmpty()){
+                    suggestionsListView.setVisibility(View.GONE);
+                    suggestionsListView.setClickable(false);
+                }else{
+                    adapter.getFilter().filter(searchText);
+                    suggestionsListView.setVisibility(View.VISIBLE);
+                    suggestionsListView.setClickable(true);
+                }
+
             }
 
             @Override
@@ -266,4 +374,5 @@ public class user_dashboard extends AppCompatActivity {
         }
         return searchResults;
     }
+
 }
