@@ -5,6 +5,15 @@ public class listofbusiness {
 
     public listofbusiness() {
     }
+    private boolean isApproved;
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
+
 
     public listofbusiness(String id, String garage_name, String available_time, String mobile, String service, String location) {
         this.id = id;

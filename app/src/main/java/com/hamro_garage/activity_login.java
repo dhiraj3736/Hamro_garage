@@ -92,11 +92,12 @@ public class activity_login extends AppCompatActivity {
                             try {
                                 JSONObject jsonObject=new JSONObject(response);
 
-                                if(jsonObject.getString("result").equals("sucess")){
+                                if(jsonObject.has("session_id") && jsonObject.getString("result").equals("sucess")){
                                     SharedPreferences sharedPreferences= getSharedPreferences("HamroGarage", Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor=sharedPreferences.edit();
-                                    StaticValues.garageid=jsonObject.getString("session_id");
+
                                     sessionID=jsonObject.getString("session_id");
+                                    StaticValues.garageid=sessionID;
                                     editor.putString("session_id", sessionID);
                                     editor.putString("userType",user);
                                     Log.d("Session_id",""+sessionID);
@@ -110,18 +111,22 @@ public class activity_login extends AppCompatActivity {
                                     }
                                     else if (user.equals("mechanic")){
                                         Intent intent = new Intent(activity_login.this, garage_dashbord.class);
-//                                intent.putExtra("session_id",sessionID);
+                                intent.putExtra("session_id",sessionID);
                                         startActivity(intent);
+
 
 
                                     }
                                 } else if (jsonObject.getString("result").equals("fail")) {
                                     Toast.makeText(activity_login.this, "Invalid Login Id/Password", Toast.LENGTH_SHORT).show();
 
+                                }else {
+                                    Toast.makeText(activity_login.this, "Invalid Login Id/Password", Toast.LENGTH_SHORT).show();
                                 }
 
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(activity_login.this, "Error parsing server response", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }, new Response.ErrorListener() {

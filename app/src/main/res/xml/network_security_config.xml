@@ -9,7 +9,7 @@
     </base-config>
     <domain-config cleartextTrafficPermitted="true">
 
-        <domain includeSubdomains="true">192.168.3.179</domain>
+        <domain includeSubdomains="true">192.168.5.205</domain>
 
 
         <!-- Add more domains or IP addresses if needed -->

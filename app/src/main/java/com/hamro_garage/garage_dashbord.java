@@ -52,6 +52,9 @@ public class garage_dashbord extends AppCompatActivity {
         moreOptions=findViewById(R.id.moreOptions);
         registerForContextMenu(moreOptions);
 
+
+       sessionid=StaticValues.garageid;
+       Log.d("garageid",""+sessionid);
         String url=Endpoints.getgarageid;
 
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -80,7 +83,13 @@ public class garage_dashbord extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(garage_dashbord.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+                String errorMessage = error.getMessage();
+                if (errorMessage != null && !errorMessage.isEmpty()) {
+                    Toast.makeText(garage_dashbord.this, errorMessage, Toast.LENGTH_SHORT).show();
+                } else {
+                    // If the error message is null or empty, you can provide a default error message.
+                    Toast.makeText(garage_dashbord.this, "An error occurred.", Toast.LENGTH_SHORT).show();
+                }
             }
         }){
             @Nullable
@@ -89,17 +98,15 @@ public class garage_dashbord extends AppCompatActivity {
                 Map<String, String> data = new HashMap<>();
 
 
-                data.put("u_id", StaticValues.garageid);
+                data.put("u_id",sessionid);
                 return data;
             }
         };
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(request);
 
-//
-//        Intent intent=getIntent();
-//        sessionid=intent.getStringExtra("session_id");
-//        Log.d("session_id",""+sessionid);
+
+
 
         garagedetail.setOnClickListener(new View.OnClickListener() {
             @Override
