@@ -157,10 +157,15 @@
     android:layout_height="30dp"
   android:layout_alignEnd="@id/searchView"
     android:layout_alignTop="@id/searchView"
-
-    android:backgroundTint="@color/purple_200"
+    android:backgroundTint="@color/white"
     android:id="@+id/searchBtn"
-    />
+    >
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/baseline_search_24"/>
+
+</com.google.android.material.card.MaterialCardView>
     <ListView
         android:background="@color/white"
         android:id="@+id/suggestionList"

@@ -42,7 +42,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/baseline_add_budiness" />
+                    android:src="@drawable/business_bag_svgrepo_com" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/baseline_add_budiness" />
+                    android:src="@drawable/uerdetail" />
 
                 <TextView
                     android:layout_width="wrap_content"

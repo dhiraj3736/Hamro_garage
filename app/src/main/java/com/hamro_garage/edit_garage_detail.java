@@ -144,7 +144,7 @@ public class edit_garage_detail extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         if (response.equals("success")){
-                            Toast.makeText(edit_garage_detail.this, "Added", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(edit_garage_detail.this, "update successfully", Toast.LENGTH_SHORT).show();
 
 
 
