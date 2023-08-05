@@ -24,177 +24,264 @@
 
         <TextView
             android:id="@+id/textview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginTop="-50dp"
-            android:layout_marginBottom="500dp"
+            android:layout_marginTop="50dp"
             android:text="garage detail"
             android:textColor="#fff"
             android:textSize="35sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/na"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="@color/ssss"
+            app:strokeWidth="2dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_view"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="15dp">
 
         <TextView
             android:id="@+id/garage_name_textview"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Garage Name"
             android:textStyle="bold"
             android:textColor="@color/ssss"
             android:textSize="25sp"
-            android:gravity="center"
 
-            android:layout_marginTop="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview"/>
+            android:layout_marginTop="10dp"
+          />
 
         <TextView
             android:id="@+id/garage_name"
-            android:layout_marginEnd="45dp"
             android:gravity="center"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginStart="45dp"
+            android:layout_marginBottom="10dp"
+
+
+            />
+        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="@color/ssss"
+            app:strokeWidth="2dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginHorizontal="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/garage_name_textview"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/na"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="15dp">
         <TextView
             android:id="@+id/time_textview"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Time"
             android:textStyle="bold"
             android:textColor="@color/ssss"
             android:textSize="25sp"
-            android:layout_marginStart="-20dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/garage_name"/>
+           />
 
         <TextView
             android:id="@+id/time"
-            android:layout_marginEnd="45dp"
             android:gravity="center"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginStart="45dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/time_textview"
+            android:layout_marginBottom="10dp"
+
+
             />
 
+        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="@color/ssss"
+            app:strokeWidth="2dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/to"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="15dp">
         <TextView
+
             android:id="@+id/mobile_textview"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mobile"
             android:textStyle="bold"
             android:textColor="@color/ssss"
             android:textSize="25sp"
-
             android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/time"/>
+
+            />
 
         <TextView
             android:id="@+id/mobile"
-            android:layout_marginEnd="45dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="21sp"
-            android:layout_marginStart="45dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mobile_textview"
-            />
+            android:layout_marginBottom="10dp"
 
-        <TextView
-            android:id="@+id/service_textview"
-            android:gravity="center"
+
+            />
+        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/co"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Service Name:"
+            app:strokeColor="@color/ssss"
+            app:strokeWidth="2dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/to"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="15dp">
+        <TextView
+            android:id="@+id/service_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Service Name"
             android:textStyle="bold"
             android:textColor="@color/ssss"
             android:textSize="25sp"
-
             android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mobile"/>
+         />
 
         <TextView
             android:id="@+id/service"
-            android:layout_marginEnd="45dp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="21sp"
-            android:layout_marginStart="45dp"
+            android:layout_marginBottom="10dp"
+
+
+            />
+
+        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/lo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="@color/ssss"
+            app:strokeWidth="2dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginHorizontal="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/service_textview"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/co"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginStart="15dp">
         <TextView
             android:id="@+id/location_textview"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Location"
             android:textStyle="bold"
             android:textColor="@color/ssss"
             android:textSize="25sp"
-
             android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/service"/>
+            />
 
         <TextView
             android:id="@+id/location"
-            android:layout_marginEnd="45dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginStart="45dp"
+            android:layout_marginBottom="10dp"
+
+            />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/loo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="@color/ssss"
+            app:strokeWidth="2dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginHorizontal="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location_textview"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/lo"
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="15dp">
+
         <TextView
             android:id="@+id/status_textview"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Status:"
@@ -202,27 +289,20 @@
             android:textColor="@color/ssss"
             android:textSize="25sp"
 
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location" />
+           />
         <TextView
             android:id="@+id/status"
-            android:layout_marginEnd="45dp"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginStart="45dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status_textview"
+            android:layout_marginBottom="10dp"
             />
 
+
+        </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <Button
             android:layout_width="wrap_content"
@@ -236,7 +316,7 @@
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/status"
+            app:layout_constraintTop_toBottomOf="@+id/loo"
             />
 
 
