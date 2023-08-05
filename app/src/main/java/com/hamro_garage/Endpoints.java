@@ -23,12 +23,14 @@ public class Endpoints {
     public static final String approve= BASE_URL + "approve.php";
     public static final String get_user_detail= BASE_URL + "getuserdeteil.php";
     public static final String garage_detail_for_activity= BASE_URL + "get_garage_detail_activity.php";
+    public static final String garage_detail_for_activity_search= BASE_URL + "get_garage_detail_activity_search.php";
     public static final String checkgarageexit= BASE_URL + "garagestatus.php";
 
     public static final String Search_Garage = BASE_URL + "search_garage.php";
     public static final String save_feedback= BASE_URL + "save_feedback.php";
     public static final String getfeedback= BASE_URL + "getfeedback.php";
     public static final String getgarageid= BASE_URL + "get_garage_id.php";
-    public static final String getSearchAPI= BASE_URL + "searchAPI.php";
+    public static final String getSearchSuggestions= BASE_URL + "searchSuggestions.php";
+    public static final String implementSearchAlgorithm= BASE_URL + "searchAlgorithm.php";
 
 }
