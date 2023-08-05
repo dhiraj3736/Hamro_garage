@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/top_view"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="70dp"
         android:layout_marginRight="25dp"
         android:columnCount="3"
         android:rowCount="3">
@@ -76,7 +76,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/baseline_add_budiness" />
+                    android:src="@mipmap/ic_detail" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -110,7 +110,7 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/baseline_add_budiness" />
+                    android:src="@mipmap/ic_feedback"/>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -1,6 +1,8 @@
 package com.hamro_garage.adaptor;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +41,13 @@ public class businessAdaptor extends ArrayAdapter<listofbusiness> {
         this.context=context;
         this.arraylistbusiness=arraylistbusiness;
     }
+    private void saveApprovalStatus(String id, boolean isApproved) {
+        SharedPreferences preferences = context.getSharedPreferences("ApprovalStatus", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean(id, isApproved);
+        editor.apply();
+    }
+
 
     @NonNull
     @Override
@@ -61,6 +70,17 @@ public class businessAdaptor extends ArrayAdapter<listofbusiness> {
         tvlocation.setText(arraylistbusiness.get(position).getLocation());
 
 
+
+
+        // Get the approval status from SharedPreferences
+        boolean isApproved = context.getSharedPreferences("ApprovalStatus", Context.MODE_PRIVATE)
+                .getBoolean(arraylistbusiness.get(position).getId(), false);
+
+        // Set the button color based on the isApproved field
+        int buttonColor = isApproved ? Color.GREEN : Color.RED;
+        app.setBackgroundColor(buttonColor);
+
+
         app.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +97,15 @@ public class businessAdaptor extends ArrayAdapter<listofbusiness> {
                             public void onResponse(String response) {
 
                                 if (response.equals("success")){
-                            Log.d("garage approve", "done");
+                                    arraylistbusiness.get(position).setApproved(true); // Set to 'true' for approved
+
+                                    // Save the approval status to SharedPreferences
+                                    saveApprovalStatus(arraylistbusiness.get(position).getId(), true);
+
+                                    // Notify the adapter that the data has changed
+                                    notifyDataSetChanged();
+
+                                    Log.d("garage approve", "done");
 
 
 
@@ -128,6 +156,14 @@ public class businessAdaptor extends ArrayAdapter<listofbusiness> {
 
                                 if (response.equals("success")){
                                     Log.d("garage approve", "done");
+                                    // Update the isApproved field in the data model
+                                    arraylistbusiness.get(position).setApproved(false); // Set to 'false' for not approved
+
+                                    // Save the approval status to SharedPreferences
+                                    saveApprovalStatus(arraylistbusiness.get(position).getId(), false);
+
+                                    // Notify the adapter that the data has changed
+                                    notifyDataSetChanged();
 
 
                                 }

@@ -2,24 +2,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="8dp">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+     app:strokeColor="@color/ssss"
+        app:cardCornerRadius="10dp"
+        app:strokeWidth="3dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp">
+
+
 
     <TextView
         android:id="@+id/userNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
         android:text="User Name" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Feedback:" />
 
     <TextView
         android:id="@+id/feedbackTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="Feedback Text" />
+        android:layout_marginStart="8dp"
+        android:textSize="18sp"
+        android:text="Feedback Text"
 
+        />
+        </LinearLayout>
 
-
+        </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
 </LinearLayout>

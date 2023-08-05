@@ -78,7 +78,7 @@
                     android:id="@+id/mechanicbtn"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    android:src="@mipmap/ic_mechanic"
+                    android:src="@mipmap/ic_mechanic_foreground"
                     android:layout_gravity="center_horizontal" />
                 <TextView
                     android:layout_width="wrap_content"

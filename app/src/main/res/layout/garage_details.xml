@@ -85,7 +85,7 @@
         android:id="@+id/mobile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="mobile:"
+        android:text="Mobile:"
         android:textSize="22sp"
         android:textColor="@color/ssss"
         android:textStyle="bold"

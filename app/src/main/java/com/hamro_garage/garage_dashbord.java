@@ -52,6 +52,9 @@ public class garage_dashbord extends AppCompatActivity {
         moreOptions=findViewById(R.id.moreOptions);
         registerForContextMenu(moreOptions);
 
+
+       sessionid=StaticValues.garageid;
+       Log.d("garageid",""+sessionid);
         String url=Endpoints.getgarageid;
 
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -95,17 +98,15 @@ public class garage_dashbord extends AppCompatActivity {
                 Map<String, String> data = new HashMap<>();
 
 
-                data.put("u_id", StaticValues.garageid);
+                data.put("u_id",sessionid);
                 return data;
             }
         };
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(request);
 
-//
-//        Intent intent=getIntent();
-//        sessionid=intent.getStringExtra("session_id");
-//        Log.d("session_id",""+sessionid);
+
+
 
         garagedetail.setOnClickListener(new View.OnClickListener() {
             @Override

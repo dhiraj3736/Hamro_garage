@@ -138,26 +138,34 @@
         android:id="@+id/searchView"
 
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="90dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginBottom="8dp"
         android:background="@color/white"
         android:hint="Search Garage Name or Location"
-        android:gravity="center"
+
+
 
          />
 <com.google.android.material.card.MaterialCardView
-    android:layout_width="60dp"
-    android:layout_height="60dp"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
   android:layout_alignEnd="@id/searchView"
     android:layout_alignTop="@id/searchView"
-
-    android:backgroundTint="@color/purple_200"
+    android:backgroundTint="@color/white"
     android:id="@+id/searchBtn"
-    />
+    >
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/baseline_search_24"/>
+
+</com.google.android.material.card.MaterialCardView>
     <ListView
         android:background="@color/white"
         android:id="@+id/suggestionList"

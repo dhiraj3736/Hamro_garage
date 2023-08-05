@@ -18,6 +18,7 @@ public class splash_screen extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("HamroGarage", Context.MODE_PRIVATE);
         String usertype = sharedPreferences.getString("userType", null);
         String userId = sharedPreferences.getString("session_id", null);
+        StaticValues.garageid=userId;
 
         new Handler().postDelayed(new Runnable() {
             @Override

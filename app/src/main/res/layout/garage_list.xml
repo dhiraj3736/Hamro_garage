@@ -1,55 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/purple_200"
+        app:strokeWidth="2dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="10dp">
     <TextView
         android:id="@+id/id"
         android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginStart="160dp"
+
+        android:layout_marginTop="15dp"
         android:text="1"
         android:gravity="center_vertical|center"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:background="@drawable/circle"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Garage Name:"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:gravity="center"/>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:id="@+id/garagename"
         android:text="garagename"
         android:textSize="20sp"
         android:gravity="center"/>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time:"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:id="@+id/time"
         android:text="available time"
         android:textSize="20sp"
         android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile Number:"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"/>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:id="@+id/mobile"
         android:text="mobile"
         android:textSize="20sp"
         android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="services:"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"/>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:id="@+id/service"
         android:text="service"
         android:textSize="20sp"
+        android:layout_marginEnd="10dp"
         android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location:"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center"/>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:id="@+id/location"
         android:text="location"
         android:textSize="20sp"
         android:gravity="center"/>
+        </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,17 +148,20 @@
         android:id="@+id/approve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="changecolor"
         android:text="approve"
-
-        android:layout_marginStart="70dp"/>
+/>
 
     <Button
         android:id="@+id/notapprove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Not approve"
-        android:layout_marginStart="10dp"/>
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"/>
+
+
 </LinearLayout>
-
-
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
