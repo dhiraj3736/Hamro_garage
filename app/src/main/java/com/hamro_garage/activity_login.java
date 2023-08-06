@@ -83,7 +83,11 @@ public class activity_login extends AppCompatActivity {
                     toast.show();
                 }
                 if(password.isEmpty()){
-                    Toast.makeText(activity_login.this, "please enter password", Toast.LENGTH_SHORT).show();
+
+                    Toast toast = Toast.makeText(activity_login.this, "Please enter password", Toast.LENGTH_SHORT);
+                    TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+                    toastMessage.setTextColor(Color.RED);
+                    toast.show();
                 }
                 if (!email.equals("")&& !password.equals("")){
                     StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -118,10 +122,16 @@ public class activity_login extends AppCompatActivity {
 
                                     }
                                 } else if (jsonObject.getString("result").equals("fail")) {
-                                    Toast.makeText(activity_login.this, "Invalid Login Id/Password", Toast.LENGTH_SHORT).show();
+                                    Toast toast = Toast.makeText(activity_login.this, "Invalid Login Id/Password", Toast.LENGTH_SHORT);
+                                    TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+                                    toastMessage.setTextColor(Color.RED);
+                                    toast.show();
 
                                 }else {
-                                    Toast.makeText(activity_login.this, "Invalid Login Id/Password", Toast.LENGTH_SHORT).show();
+                                    Toast toast = Toast.makeText(activity_login.this, "Invalid Login Id/Password", Toast.LENGTH_SHORT);
+                                    TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+                                    toastMessage.setTextColor(Color.RED);
+                                    toast.show();
                                 }
 
                             } catch (JSONException e) {
