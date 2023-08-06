@@ -1,8 +1,10 @@
 package com.hamro_garage;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,11 +80,11 @@ public class user_signup extends AppCompatActivity {
         String passwordmatch = mpassword.getText().toString().trim();
 
         if (fullname.isEmpty()) {
-            Toast.makeText(this, "Please enter full name", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please Enter Full Name");
             return;
         }
         if (address.isEmpty()) {
-            Toast.makeText(this, "Please enter address", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please Enter Address");
             return;
         }
         if (mobile.isEmpty()) {
@@ -158,5 +160,17 @@ public class user_signup extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(checkDuplicateRequest);
         Log.d("user", "" + user);
+    }
+    private void showCustomToast(String message) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast, findViewById(R.id.custom_toast_layout));
+
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView toastText = layout.findViewById(R.id.toast_text);
+        toastText.setText(message);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
     }
 }

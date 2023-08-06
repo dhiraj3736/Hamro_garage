@@ -3,12 +3,14 @@ package com.hamro_garage;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,7 +56,7 @@ public class activity_login extends AppCompatActivity {
 
 
         Intent intent=getIntent();
-       user=intent.getStringExtra("user");
+        user=intent.getStringExtra("user");
         Log.d("user",""+user);
 
 
@@ -76,18 +78,11 @@ public class activity_login extends AppCompatActivity {
             public void onClick(View view) {
                 email=lemail.getText().toString().trim();
                 password=lpassword.getText().toString().trim();
-                if(email.isEmpty()){
-                    Toast toast = Toast.makeText(activity_login.this, "Please enter email", Toast.LENGTH_SHORT);
-                    TextView toastMessage = toast.getView().findViewById(android.R.id.message);
-                    toastMessage.setTextColor(Color.RED);
-                    toast.show();
-                }
-                if(password.isEmpty()){
 
-                    Toast toast = Toast.makeText(activity_login.this, "Please enter password", Toast.LENGTH_SHORT);
-                    TextView toastMessage = toast.getView().findViewById(android.R.id.message);
-                    toastMessage.setTextColor(Color.RED);
-                    toast.show();
+                if (email.isEmpty()) {
+                    showCustomToast("Please enter email");
+                } else if (password.isEmpty()) {
+                    showCustomToast("Please enter password");
                 }
                 if (!email.equals("")&& !password.equals("")){
                     StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -115,28 +110,22 @@ public class activity_login extends AppCompatActivity {
                                     }
                                     else if (user.equals("mechanic")){
                                         Intent intent = new Intent(activity_login.this, garage_dashbord.class);
-                                intent.putExtra("session_id",sessionID);
+                                        intent.putExtra("session_id",sessionID);
                                         startActivity(intent);
 
 
 
                                     }
                                 } else if (jsonObject.getString("result").equals("fail")) {
-                                    Toast toast = Toast.makeText(activity_login.this, "Invalid Login Id/Password", Toast.LENGTH_SHORT);
-                                    TextView toastMessage = toast.getView().findViewById(android.R.id.message);
-                                    toastMessage.setTextColor(Color.RED);
-                                    toast.show();
+                                    showCustomToast("Invalid Login Id/Password");
 
                                 }else {
-                                    Toast toast = Toast.makeText(activity_login.this, "Invalid Login Id/Password", Toast.LENGTH_SHORT);
-                                    TextView toastMessage = toast.getView().findViewById(android.R.id.message);
-                                    toastMessage.setTextColor(Color.RED);
-                                    toast.show();
+                                    showCustomToast("Invalid Login Id/Password");
                                 }
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(activity_login.this, "Error parsing server response", Toast.LENGTH_SHORT).show();
+                                showCustomToast("Error parsing server response");
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -162,5 +151,16 @@ public class activity_login extends AppCompatActivity {
             }
         });
     }
+    private void showCustomToast(String message) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast, findViewById(R.id.custom_toast_layout));
 
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView toastText = layout.findViewById(R.id.toast_text);
+        toastText.setText(message);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
 }
