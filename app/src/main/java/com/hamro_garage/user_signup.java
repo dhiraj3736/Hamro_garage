@@ -88,31 +88,31 @@ public class user_signup extends AppCompatActivity {
             return;
         }
         if (mobile.isEmpty()) {
-            Toast.makeText(this, "Please enter mobile number", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please Enter Mobile number");
             return;
         }
         if (!Mobilematch.matches("^(97|98)\\d{8}$")) {
-            Toast.makeText(this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter a valid mobile number");
             return;
         }
         if (email.isEmpty()) {
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please Enter email");
             return;
         }
         if (!Emailmatch.matches("^[_A-Za-z0-9-]+(.[_A-Za-z0-9-]+)@[a-z]+(.[a-z]+)(.[a-z]{2,})$")) {
-            Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter a valid email");
             return;
         }
         if (password.isEmpty()) {
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter password");
             return;
         }
         if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")) {
-            Toast.makeText(this, "Please enter a valid password", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter a valid password");
             return;
         }
         if (!password.equals(repassword)) {
-            Toast.makeText(this, "Password mismatch", Toast.LENGTH_SHORT).show();
+            showCustomToast("Password not match");
             return;
         }
 
@@ -121,9 +121,11 @@ public class user_signup extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         if (response.equals("Username or Email already registered!!")) {
-                            Toast.makeText(user_signup.this, "Email or phone number already exists!", Toast.LENGTH_SHORT).show();
+
+                            showCustomToast("Email or phone number already exists!");
                         } else if (response.equals("success")) {
-                            Toast.makeText(user_signup.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+                            showCustomToast("Registration successful!");
+
                             mfullname.setText("");
                             maddress.setText("");
                             memail.setText("");
