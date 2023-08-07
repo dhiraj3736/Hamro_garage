@@ -172,6 +172,8 @@ public class OwnerMapFragment extends Fragment implements OnMapReadyCallback {
                         } else {
                             // Handle error response
                             Toast.makeText(requireContext(), "Failed to save location", Toast.LENGTH_SHORT).show();
+                            requireActivity().onBackPressed();
+                            Toast.makeText(requireContext(), "Successfully added location", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },

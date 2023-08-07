@@ -38,7 +38,7 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/garagename"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
@@ -61,7 +61,7 @@
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/time"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
@@ -82,7 +82,7 @@
         <EditText
             android:id="@+id/mobileno"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
@@ -106,7 +106,7 @@
         <EditText
             android:id="@+id/service"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
@@ -127,7 +127,7 @@
         <EditText
             android:id="@+id/location"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
@@ -151,10 +151,11 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="@string/detail_location"
-
-            android:textColor="#7082c2"
-            android:textSize="20sp"
+            android:textColor="#F8F7F4"
+            android:background="#673AB7"
+            android:textSize="30sp"
             android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/location"

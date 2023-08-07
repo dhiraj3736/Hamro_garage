@@ -12,6 +12,6 @@
     <string name="googleApi">AIzaSyDCd9Ue8Ox4gzxhnbxlAcne9HmP-CD0M2Y</string>
     <string name="admin">Admin</string>
     <string name="user_profile">User Profile</string>
-    <string name="detail_location">add location</string>
+    <string name="detail_location">Update Location</string>
 
 </resources>
