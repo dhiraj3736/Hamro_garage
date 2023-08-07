@@ -9,7 +9,9 @@
     </base-config>
     <domain-config cleartextTrafficPermitted="true">
 
+
         <domain includeSubdomains="true">192.168.1.2</domain>
+
 
 
         <!-- Add more domains or IP addresses if needed -->

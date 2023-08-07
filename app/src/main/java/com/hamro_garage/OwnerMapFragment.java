@@ -171,9 +171,11 @@ public class OwnerMapFragment extends Fragment implements OnMapReadyCallback {
 
                         } else {
                             // Handle error response
+
                             Toast.makeText(requireContext(), "Failed to save location", Toast.LENGTH_SHORT).show();
                             requireActivity().onBackPressed();
                             Toast.makeText(requireContext(), "Successfully added location", Toast.LENGTH_SHORT).show();
+
                         }
                     }
                 },
@@ -191,6 +193,7 @@ public class OwnerMapFragment extends Fragment implements OnMapReadyCallback {
 
         queue.add(request);
     }
+
 
     // Add this new method
     private void retrieveGarageLocation() {
@@ -232,5 +235,8 @@ public class OwnerMapFragment extends Fragment implements OnMapReadyCallback {
         };
 
         queue.add(request);
+
     }
+
+
 }
