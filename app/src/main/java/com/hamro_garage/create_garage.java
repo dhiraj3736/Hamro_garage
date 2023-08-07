@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -116,27 +117,27 @@ public class create_garage extends AppCompatActivity {
 
 
         if (garagename1.isEmpty()) {
-            Toast.makeText(this, "Please enter garage name", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter garage name");
             return;
         }
         if (time1.isEmpty()) {
-            Toast.makeText(this, "Please enter time", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter time");
             return;
         }
         if (mobile1.isEmpty()) {
-            Toast.makeText(this, "Please enter mobile no.", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter mobile number");
             return;
         }
         if (service1.isEmpty()) {
-            Toast.makeText(this, "Please enter services", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter service");
             return;
         }
         if (location1.isEmpty()) {
-            Toast.makeText(this, "Please enter location", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter location");
             return;
         }
         if (!Mobilematch.matches("^(97|98)\\d{8}$")) {
-            Toast.makeText(this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
+            showCustomToast("Please enter a valid mobile number");
             return;
         }
         StringRequest checkDuplicateRequest=new StringRequest(Request.Method.POST, url,
@@ -145,7 +146,7 @@ public class create_garage extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         if (response.equals("success")){
-                            Toast.makeText(create_garage.this, "Add successfully", Toast.LENGTH_SHORT).show();
+                            showCustomToast("Add successfully");
 //                            retrieveData();
 //                            editText.setText("");
 
@@ -154,7 +155,8 @@ public class create_garage extends AppCompatActivity {
                             Toast.makeText(create_garage.this, "Something went wrong!", Toast.LENGTH_SHORT).show();
                         }
                         else if (response.equals("Already registered")) {
-                            Toast.makeText(create_garage.this, "Garage already registered", Toast.LENGTH_SHORT).show();
+
+                            showCustomToast("Garage already registered");
                         }
                     }
                 },
@@ -185,10 +187,18 @@ public class create_garage extends AppCompatActivity {
 
 
     }
+    private void showCustomToast(String message) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast, findViewById(R.id.custom_toast_layout));
 
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) TextView toastText = layout.findViewById(R.id.toast_text);
+        toastText.setText(message);
 
-
-
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
+    }
 
 
 }
